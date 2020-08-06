@@ -1,0 +1,56 @@
+{
+    "name": "paper-clipper",
+    "version": "0.0.1-alpha",
+    "description": "",
+    "main": "src/main/index.js",
+    "author": "paper-clipper.io",
+    "license": "MIT",
+    "homepage": "https://paper-clipper.github.io",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/paper-clipper/paper-clipper.git"
+    },
+    "bugs": {
+        "url": "https://github.com/paper-clipper/paper-clipper/issues"
+    },
+    "scripts": {
+        "build": "webpack --config ./config/webpack.build.config.js --mode production",
+        "lint": "eslint \"{src,test}/**/*.js\"",
+        "lint:fix": "eslint \"{src,test}/**/*.js\" --fix",
+        "prod": "webpack --mode production --config ./config/webpack.build.config.js && electron --noDevServer .",
+        "start": "webpack-dev-server --hot --host 0.0.0.0 --config=./config/webpack.dev.config.js --mode development",
+        "package": "npm run build",
+        "postpackage": "electron-packager ./ --out=./builds"
+    },
+    "dependencies": {
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.11.1",
+        "@babel/plugin-transform-runtime": "^7.11.0",
+        "@babel/preset-env": "^7.11.0",
+        "@babel/preset-react": "^7.10.4",
+        "babel-eslint": "^10.1.0",
+        "babel-jest": "^26.2.2",
+        "babel-loader": "^8.1.0",
+        "babili-webpack-plugin": "^0.1.2",
+        "cross-env": "^7.0.2",
+        "css-loader": "^4.2.0",
+        "electron": "^9.1.2",
+        "electron-devtools-installer": "^3.1.1",
+        "electron-packager": "^15.0.0",
+        "eslint": "^6.8.0",
+        "eslint-plugin-babel": "^5.3.1",
+        "eslint-plugin-jest": "^23.20.0",
+        "eslint-plugin-react": "^7.20.5",
+        "eslint-plugin-react-hooks": "^4.0.8",
+        "file-loader": "^6.0.0",
+        "html-webpack-plugin": "^4.3.0",
+        "mini-css-extract-plugin": "^0.9.0",
+        "style-loader": "^1.2.1",
+        "webpack": "^4.44.1",
+        "webpack-cli": "^3.3.12",
+        "webpack-dev-server": "^3.11.0"
+    }
+}
