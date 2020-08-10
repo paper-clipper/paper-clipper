@@ -13,12 +13,10 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
-                include: defaultInclude
             },
             {
                 test: /\.(js|jsx)$/,
                 use: [{ loader: 'babel-loader' }],
-                include: defaultInclude
             },
             {
                 test: /\.(jpe?g|png|gif)$/,
