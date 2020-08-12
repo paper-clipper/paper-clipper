@@ -6,6 +6,7 @@ export default styled.div`
     right: 8px;
     display: flex;
     flex-direction: row-reverse;
+    font-size: 0.875rem;
     color: ${({ theme }) => theme.colors.blackLighter};
     cursor: pointer;
 `
