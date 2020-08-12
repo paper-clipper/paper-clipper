@@ -34,7 +34,7 @@
             "single"
         ],
         "comma-dangle": ["error", {
-            "arrays": "always",
+            "arrays": "always-multiline",
             "objects": "always-multiline",
             "imports": "always-multiline",
             "exports": "always-multiline",
