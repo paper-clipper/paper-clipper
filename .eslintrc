@@ -30,6 +30,13 @@
         "quotes": [
             "error",
             "single"
-        ]
+        ],
+        "comma-dangle": ["error", {
+            "arrays": "always",
+            "objects": "always-multiline",
+            "imports": "always-multiline",
+            "exports": "always-multiline",
+            "functions": "never"
+        }]
     }
 }

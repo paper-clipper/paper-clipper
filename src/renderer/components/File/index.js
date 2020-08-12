@@ -8,13 +8,13 @@ import { File } from '../../layout/components'
 // eslint-disable-next-line react/display-name
 export default ({
     // eslint-disable-next-line react/prop-types
-    extension
+    extension,
 }) => {
     
     const { icon, color, title } = fileTypes[extension] || {
         title: 'xyz',
         icon: faFile,
-        color: '#a7a6ab'
+        color: '#a7a6ab',
     }
 
     return (

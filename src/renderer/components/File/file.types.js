@@ -11,7 +11,7 @@ export default {
     'pdf': {
         title: 'pdf',
         icon: faFilePdf,
-        color: '#ff6071'
+        color: '#ff6071',
     },
     'docx': {
         title: 'docx',

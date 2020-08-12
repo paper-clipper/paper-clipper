@@ -3,5 +3,5 @@ import Card from './Card'
 
 export {
     File,
-    Card
+    Card,
 }
