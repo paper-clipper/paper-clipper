@@ -34,7 +34,10 @@ function createWindow () {
 	mainWindow = new BrowserWindow({
 		width: 1376, // width of the window
 		height: 786, // height of the window
-		show: false, // don't show until window is ready
+        show: false, // don't show until window is ready
+        transparent: true,
+        frame: false,
+        titleBarStyle: 'hiddenInset',
 		webPreferences: {
 			nodeIntegration: true,
 		},
