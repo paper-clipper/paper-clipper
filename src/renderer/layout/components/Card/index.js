@@ -13,7 +13,8 @@ const Card = styled.div`
     width: 198px;
     height: 290px;
     box-sizing: border-box;
-    padding: 1rem;
+    padding: 0 1rem;
+    margin: 0.75rem;
     background: ${({ theme }) => theme.colors.white};
     box-shadow: ${({ theme }) => theme.elevations[0]};
     border-radius: 12px;
