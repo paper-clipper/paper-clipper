@@ -5,7 +5,6 @@ import fileTypes from './file.types'
 
 import { File } from '../../layout/components'
 
-// eslint-disable-next-line react/display-name
 export default ({
     // eslint-disable-next-line react/prop-types
     extension,

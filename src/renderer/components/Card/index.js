@@ -7,7 +7,6 @@ import { Tag } from '../../layout/elements'
 
 import File from '../File'
 
-// eslint-disable-next-line react/display-name
 export default () => {
     return (
         <Card>
