@@ -6,7 +6,6 @@ import fileTypes from './file.types'
 import { File } from '../../layout/components'
 
 export default ({
-    // eslint-disable-next-line react/prop-types
     extension,
 }) => {
     
