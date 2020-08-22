@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@paper/*": [
+                "./src/renderer/*"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "dist",
+        "config",
+        "static"
+    ]
+}

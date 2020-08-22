@@ -8,6 +8,11 @@ const defaultInclude = path.join(__dirname, '../src/renderer')
 
 module.exports = {
     entry: path.join(defaultInclude, 'index.js'),
+    resolve: {
+        alias: {
+            '@paper': defaultInclude,
+        },
+    },
     module: {
         rules: [
             {
@@ -21,21 +26,21 @@ module.exports = {
             {
                 test: /\.(jpe?g|png|gif)$/,
                 use: [{ loader: 'file-loader?name=img/[name]__[hash:base64:5].[ext]' }],
-                include: defaultInclude
+                include: defaultInclude,
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)$/,
                 use: [{ loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]' }],
-                include: defaultInclude
-            }
-        ]
+                include: defaultInclude,
+            },
+        ],
     },
     target: 'electron-renderer',
     plugins: [
         new HtmlWebpackPlugin(),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('development')
-        })
+            'process.env.NODE_ENV': JSON.stringify('development'),
+        }),
     ],
     devtool: 'cheap-source-map',
     devServer: {
@@ -43,7 +48,7 @@ module.exports = {
         stats: {
             colors: true,
             chunks: false,
-            children: false
+            children: false,
         },
         before() {
             spawn(
@@ -53,6 +58,6 @@ module.exports = {
             )
                 .on('close', () => process.exit(0))
                 .on('error', spawnError => console.error(spawnError))
-        }
-    }
+        },
+    },
 }

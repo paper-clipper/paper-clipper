@@ -9,32 +9,37 @@ const defaultInclude = path.join(__dirname, '../src/renderer')
 
 module.exports = {
     entry: path.join(defaultInclude, 'index.js'),
+    resolve: {
+        alias: {
+            '@paper': defaultInclude,
+        },
+    },
     module: {
         rules: [
             {
                 test: /\.css$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    'css-loader'
+                    'css-loader',
                 ],
-                include: defaultInclude
+                include: defaultInclude,
             },
             {
                 test: /\.(js|jsx)$/,
                 use: [{ loader: 'babel-loader' }],
-                include: defaultInclude
+                include: defaultInclude,
             },
             {
                 test: /\.(jpe?g|png|gif)$/,
                 use: [{ loader: 'file-loader?name=img/[name]__[hash:base64:5].[ext]' }],
-                include: defaultInclude
+                include: defaultInclude,
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)$/,
                 use: [{ loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]' }],
-                include: defaultInclude
-            }
-        ]
+                include: defaultInclude,
+            },
+        ],
     },
     target: 'electron-renderer',
     plugins: [
@@ -43,17 +48,17 @@ module.exports = {
             // Options similar to the same options in webpackOptions.output
             // both options are optional
             filename: 'bundle.css',
-            chunkFilename: '[id].css'
+            chunkFilename: '[id].css',
         }),
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
+            'process.env.NODE_ENV': JSON.stringify('production'),
         }),
-        new BabiliPlugin()
+        new BabiliPlugin(),
     ],
     stats: {
         colors: true,
         children: false,
         chunks: false,
-        modules: false
-    }
+        modules: false,
+    },
 }
