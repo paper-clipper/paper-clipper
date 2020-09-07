@@ -9,7 +9,7 @@ const Popup = styled.div`
     padding: 2rem;
     border-radius: 12px;
     max-width: 400px;
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.90);
     backdrop-filter: blur(50px) brightness(100%) opacity(100%);
     box-shadow: ${({ theme }) => theme.elevations[0]};
 `
