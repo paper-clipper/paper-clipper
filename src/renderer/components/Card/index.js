@@ -14,7 +14,7 @@ export default () => {
                 <FontAwesomeIcon icon={faEllipsisV} fixedWidth />
             </Card.Actions>
             <Card.Media>
-                <File extension={'pdf'} />
+                <File extension={'pdf'} showExtension={true} />
             </Card.Media>
             <Card.Title>Invoice 05/2020</Card.Title>
             <Card.Subtitle>Added: 05-05-2020</Card.Subtitle>
