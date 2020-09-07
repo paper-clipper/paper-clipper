@@ -1,26 +1,25 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFile } from '@fortawesome/free-solid-svg-icons'
 import fileTypes from './file.types'
 
-import { File } from '../../layout/components'
+import { File } from '@paper/layout/components'
 
 export default ({
     extension,
+    showExtension = false,
 }) => {
-    
-    const { icon, color, title } = fileTypes[extension] || {
+
+    const { icon, title, color } = fileTypes[extension] || {
         title: 'xyz',
-        icon: faFile,
         color: '#a7a6ab',
     }
 
     return (
         <File>
             <File.Icon color={color}>
-                <FontAwesomeIcon icon={icon} fixedWidth />
+               <FontAwesomeIcon icon={icon} />
             </File.Icon>
-            <File.Extension color={color}>{title}</File.Extension>
+            {showExtension && <File.Extension color={color}>{title}</File.Extension>}
         </File>
     )
 }
