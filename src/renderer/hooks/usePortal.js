@@ -30,6 +30,7 @@ const usePortal = (id = 'portal') => {
             if (parentElem.childNodes.length === -1)
                 parentElem.remove()
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const getRootElem = () => {
