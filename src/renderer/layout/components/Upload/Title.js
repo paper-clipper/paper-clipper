@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
-export default styled.span`
-    font-size: 0.625rem;
+export default styled.p`
+    font-size: 0.75rem;
     font-family: ${({ theme }) => theme.fonts.secondary};
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.5);
+    font-weight: 600;
     line-height: 1.25;
+    color: ${({ theme }) => theme.colors.black};
 `
