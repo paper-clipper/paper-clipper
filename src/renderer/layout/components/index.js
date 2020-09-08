@@ -6,6 +6,7 @@ import Dropdown from './Dropdown'
 import Popup from './Popup'
 import Modal from './Modal'
 import TextInput from './TextInput'
+import FileInput from './FileInput'
 import Upload from './Upload'
 
 export {
@@ -17,5 +18,6 @@ export {
     Popup,
     Modal,
     TextInput,
+    FileInput,
     Upload,
 }
