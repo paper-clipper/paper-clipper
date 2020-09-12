@@ -2,6 +2,7 @@ import File from './File'
 import Card from './Card'
 import Dropdown from './Dropdown'
 // import Sidebar from './Sidebar'
+import Navigation from './Navigation'
 // import Header from './Header'
 import Popup from './Popup'
 import Modal from './Modal'
@@ -14,6 +15,7 @@ export {
     Card,
     Dropdown,
     // Sidebar,
+    Navigation,
     // Header,
     Popup,
     Modal,
