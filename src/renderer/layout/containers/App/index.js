@@ -10,7 +10,7 @@ const App = styled.div`
     display: grid;
     position: relative;
     background: ${({ theme }) => theme.colors.white};
-    grid-template-columns: auto 80px;
+    grid-template-columns: auto 64px;
     grid-template-rows: auto auto;
     grid-template-areas:
       "header  sidebar"
