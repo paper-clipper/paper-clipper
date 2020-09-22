@@ -1,5 +1,13 @@
 import styled, { css } from 'styled-components'
 import { applyStyleModifiers } from 'styled-components-modifiers'
+import {
+    colorPrimary,
+    colorPrimary10,
+    colorPrimary80,
+    colorSecondary,
+    fontSecondary,
+    transition1,
+} from '@paper/layout/mixins'
 
 const BUTTON_MODIFIERS = {
 
@@ -7,6 +15,7 @@ const BUTTON_MODIFIERS = {
         min-width: auto;
         width: 40px;
         height: 40px;
+        padding: 0;
     `,
 
 }
@@ -25,45 +34,45 @@ const Button = styled.button`
     user-select: none;
     overflow: visible;
     cursor: pointer;
-    font-size: 0.875rem;
-    font-family: ${({ theme }) => theme.fonts.secondary};
+    font-size: 0.75rem;
+    font-family: ${fontSecondary};
     font-weight: 700;
-    color: ${({ theme }) => theme.colors.black};
-    padding: 0 0.5rem;
-    min-width: 80px;
-    height: 36px;
+    color: ${colorPrimary};
+    padding: 0 1rem;
+    height: 32px;
     border-radius: 12px;
     ${applyStyleModifiers(BUTTON_MODIFIERS)}
 `
 
-const TEXT_BUTTON_MODIFIERS = {
-
-    'primary': ({ theme }) => css`
-        color: ${theme.colors.highlight};
-    `,
-
-}
+const TEXT_BUTTON_MODIFIERS = {}
 
 Button.Text = styled(Button)`
     ${applyStyleModifiers(TEXT_BUTTON_MODIFIERS)};
 `
 
-const CONTAINED_BUTTON_MODIFIERS = {
+const OUTLINED_BUTTON_MODIFIERS = {}
 
-    'primary': ({ theme }) => css`
-        color: ${theme.colors.highlight};
-    `,
+Button.Outlined = styled(Button)`
+    border: 1px solid ${colorPrimary};
+    transition: all ${transition1};
 
-}
+    &:hover {
+        background: ${colorPrimary10};
+        transform: translate(0, -2px);
+    }
+    ${applyStyleModifiers(OUTLINED_BUTTON_MODIFIERS)};
+`
+
+const CONTAINED_BUTTON_MODIFIERS = {}
 
 Button.Contained = styled(Button)`
-    color: ${({ theme }) => theme.colors.white};
-    background: ${({ theme }) => theme.colors.black};
-    transition: all 200ms ease-in-out;
+    color: ${colorSecondary};
+    background: ${colorPrimary};
+    transition: all ${transition1};
 
     &:hover {
         transform: translate(0, -2px);
-        background: rgba(0, 0, 0, 0.85);
+        background: ${colorPrimary80};
     }
     ${applyStyleModifiers(CONTAINED_BUTTON_MODIFIERS)};
 `
