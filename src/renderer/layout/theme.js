@@ -1,6 +1,7 @@
 export const theme = {
     colors: {
         primary: '#000000',
+        primary80: 'rgba(0, 0, 0, 0.8)',
         primary50: 'rgba(0, 0, 0, 0.5)',
         primary10: 'rgba(0, 0, 0, 0.1)',
         secondary: '#ffffff',
@@ -18,6 +19,9 @@ export const theme = {
             'blur(25px) brightness(50%) opacity(50%)',
         ],
     },
+    transitions: [
+        '200ms ease-in-out',
+    ],
     fonts: {
         main: 'Lato, sans-serif',
         secondary: '\'Open Sans\', sans-serif',
