@@ -1,20 +1,3 @@
-export default {
-    colors: {
-        black: '#000000',
-        blackLighter: '#a7a6ab',
-        white: '#ffffff',
-        whiteDarker: '#f7f7f9',
-        highlight: '#0287fe',
-    },
-    elevations: [
-        '0 2px 16px rgba(90, 90, 90, 0.1)',
-    ],
-    fonts: {
-        main: 'Lato, sans-serif',
-        secondary: '\'Open Sans\', sans-serif',
-    },
-}
-
 export const theme = {
     colors: {
         primary: '#000000',
@@ -39,4 +22,22 @@ export const theme = {
         main: 'Lato, sans-serif',
         secondary: '\'Open Sans\', sans-serif',
     },
+}
+
+export default {
+    colors: {
+        black: '#000000',
+        blackLighter: '#a7a6ab',
+        white: '#ffffff',
+        whiteDarker: '#f7f7f9',
+        highlight: '#0287fe',
+    },
+    elevations: [
+        '0 2px 16px rgba(90, 90, 90, 0.1)',
+    ],
+    fonts: {
+        main: 'Lato, sans-serif',
+        secondary: '\'Open Sans\', sans-serif',
+    },
+    newTheme: theme,
 }
