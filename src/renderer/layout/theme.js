@@ -8,6 +8,7 @@ export const theme = {
         secondaryDarker: '#f7f7f9',
         neutral: '#a7a6ab',
     },
+    borderRadius: '12px',
     elevations: [
         '0 2px 16px rgba(90, 90, 90, 0.1)',
         '0 2px 8px rgba(90, 90, 90, 0.20)',
@@ -15,7 +16,8 @@ export const theme = {
     effects: {
         backgrounBlur: [
             'blur(50px) brightness(100%) opacity(50%)',
-            'blur(20px) brightness(50%) opacity(70%)',
+            // 'blur(20px) brightness(50%) opacity(70%)',
+            'blur(50px) brightness(0.95) opacity(100%)',
             'blur(25px) brightness(50%) opacity(50%)',
         ],
     },
@@ -23,7 +25,7 @@ export const theme = {
         '200ms ease-in-out',
     ],
     fonts: {
-        main: 'Lato, sans-serif',
+        primary: 'Lato, sans-serif',
         secondary: '\'Open Sans\', sans-serif',
     },
 }
