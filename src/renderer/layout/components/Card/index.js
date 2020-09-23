@@ -1,6 +1,13 @@
 import styled from 'styled-components'
+import {
+    colorSecondary,
+    elevation1,
+    transition1,
+    borderRadius,
+} from '@paper/layout/mixins'
 
 import Actions from './Actions'
+import Dropdown from './Dropdown'
 import Title from './Title'
 import Media from './Media'
 import Subtitle from './Subtitle'
@@ -15,11 +22,11 @@ const Card = styled.div`
     box-sizing: border-box;
     padding: 0.75rem 1rem;
     margin: 0.75rem;
-    background: ${({ theme }) => theme.colors.white};
-    box-shadow: ${({ theme }) => theme.elevations[0]};
-    border-radius: 12px;
+    background: ${colorSecondary};
+    box-shadow: ${elevation1};
+    border-radius: ${borderRadius};
     cursor: pointer;
-    transition: all 200ms ease-in-out;
+    transition: all ${transition1};
 
     &:hover {
         transform: translate(0, -4px);
@@ -28,6 +35,7 @@ const Card = styled.div`
 `
 
 Card.Actions = Actions
+Card.Dropdown = Dropdown
 Card.Media = Media
 Card.Title = Title
 Card.Subtitle = Subtitle
