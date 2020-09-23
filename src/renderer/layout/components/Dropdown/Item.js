@@ -1,11 +1,22 @@
 import styled from 'styled-components'
+import {
+    colorPrimary,
+    fontSecondary,
+    transition1,
+    colorPrimary10,
+} from '@paper/layout/mixins'
 
 export default styled.li`
     display: inline-flex;
     align-items: center;
-    font-family: ${({ theme }) => theme.fonts.secondary};
+    font-family: ${fontSecondary};
     font-weight: 600;
-    font-size: 0.875rem;
-    color: ${({ theme }) => theme.colors.black};
-    min-height: 40px;
+    font-size: 0.75rem;
+    color: ${colorPrimary};
+    min-height: 32px;
+    transition: all ${transition1};
+
+    &:hover {
+        background: ${colorPrimary10};
+    }
 `

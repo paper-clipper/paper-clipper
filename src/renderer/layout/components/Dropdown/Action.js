@@ -10,8 +10,4 @@ export default styled.a`
     padding: 0 0.25rem;
     align-items: center;
     cursor: pointer;
-
-    &:hover {
-        background: rgba(0, 0, 0, .15);
-    }
 `
