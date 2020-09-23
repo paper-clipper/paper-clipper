@@ -1,30 +1,25 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import { Dropdown } from '../../layout/components'
 
-export default () => {
+export default forwardRef(({ items = [] }, ref) => {
     return (
-        <Dropdown>
+        <Dropdown ref={ref}>
             <Dropdown.List>
-                <Dropdown.Item>
-                    <Dropdown.Action>
-                        <Dropdown.Icon>
-                            <FontAwesomeIcon icon={faPen} fixedWidth />
-                        </Dropdown.Icon>
-                        Edit
-                    </Dropdown.Action>
-                </Dropdown.Item>
-                <Dropdown.Item>
-                    <Dropdown.Action>
-                        <Dropdown.Icon>
-                            <FontAwesomeIcon icon={faTrash} fixedWidth />
-                        </Dropdown.Icon>
-                        Delete
-                    </Dropdown.Action>
-                </Dropdown.Item>
+                {items.map((item, i) => (
+                    <Dropdown.Item key={i}>
+                        <Dropdown.Action onClick={item.handler}>
+                            {item.icon && (
+                                <Dropdown.Icon>
+                                    <FontAwesomeIcon icon={item.icon} fixedWidth />
+                                </Dropdown.Icon>
+                            )}
+                            {item.name}
+                        </Dropdown.Action>
+                    </Dropdown.Item>
+                ))}
             </Dropdown.List>
         </Dropdown>
     )
-}
+})
