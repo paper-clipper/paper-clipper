@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export default styled.div`
     grid-area: header;
     width: 100%;
-    height: 80px;
+    height: 64px;
     z-index: 2;
     position: sticky;
     top: 0;
