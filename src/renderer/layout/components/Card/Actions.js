@@ -1,4 +1,7 @@
 import styled from 'styled-components'
+import {
+    colorNeutral,
+} from '@paper/layout/mixins'
 
 export default styled.div`
     position: absolute;
@@ -7,6 +10,6 @@ export default styled.div`
     display: flex;
     flex-direction: row-reverse;
     font-size: 0.875rem;
-    color: ${({ theme }) => theme.colors.blackLighter};
+    color: ${colorNeutral};
     cursor: pointer;
 `
