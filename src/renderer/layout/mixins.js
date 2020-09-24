@@ -1,7 +1,10 @@
 export const colorPrimary = ({ theme }) => theme.newTheme.colors.primary
 export const colorPrimary80 = ({ theme }) => theme.newTheme.colors.primary80
+export const colorPrimary50 = ({ theme }) => theme.newTheme.colors.primary50
 export const colorPrimary10 = ({ theme }) => theme.newTheme.colors.primary10
 export const colorSecondary = ({ theme }) => theme.newTheme.colors.secondary
+export const colorSecondary90 = ({ theme }) => theme.newTheme.colors.secondary90
+export const colorSecondary75 = ({ theme }) => theme.newTheme.colors.secondary75
 export const colorSecondaryDarker = ({ theme }) => theme.newTheme.colors.secondaryDarker
 export const colorNeutral = ({ theme }) => theme.newTheme.colors.neutral
 

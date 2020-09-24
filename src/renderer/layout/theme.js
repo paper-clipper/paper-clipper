@@ -5,6 +5,8 @@ export const theme = {
         primary50: 'rgba(0, 0, 0, 0.5)',
         primary10: 'rgba(0, 0, 0, 0.1)',
         secondary: '#ffffff',
+        secondary90: 'rgba(255, 255, 255, 0.9)',
+        secondary75: 'rgba(255, 255, 255, 0.75)',
         secondaryDarker: '#f7f7f9',
         neutral: '#a7a6ab',
     },
