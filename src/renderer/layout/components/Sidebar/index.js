@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-import Navigation from './Navigation'
 import Actions from './Actions'
 
 const Sidebar = styled.div`
@@ -10,10 +9,9 @@ const Sidebar = styled.div`
     backdrop-filter: blur(50px) brightness(0.95) opacity(100%);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
 `
 
-Sidebar.Navigation = Navigation
 Sidebar.Actions = Actions
 
 export default Sidebar
