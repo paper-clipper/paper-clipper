@@ -3,6 +3,7 @@ import { applyStyleModifiers } from 'styled-components-modifiers'
 import {
     colorPrimary,
     colorPrimary10,
+    colorPrimary50,
     colorPrimary80,
     colorSecondary,
     fontSecondary,
@@ -44,7 +45,17 @@ const Button = styled.button`
     ${applyStyleModifiers(BUTTON_MODIFIERS)}
 `
 
-const TEXT_BUTTON_MODIFIERS = {}
+const TEXT_BUTTON_MODIFIERS = {
+
+    'primary': theme => css`
+        color: ${colorPrimary(theme)}
+    `,
+
+    'secondary': theme => css`
+        color: ${colorPrimary50(theme)}
+    `,
+
+}
 
 Button.Text = styled(Button)`
     ${applyStyleModifiers(TEXT_BUTTON_MODIFIERS)};
