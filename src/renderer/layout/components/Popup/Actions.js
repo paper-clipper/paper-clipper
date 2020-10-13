@@ -7,4 +7,5 @@ export default styled.div`
     justify-content: flex-end;
     align-items: center;
     margin-top: 2rem;
+    box-sizing: border-box;
 `

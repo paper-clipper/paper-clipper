@@ -1,4 +1,10 @@
 import styled from 'styled-components'
+import {
+    borderRadius,
+    colorSecondary90,
+    backgroundBlur2,
+    elevation1,
+} from '@paper/layout/mixins'
 
 import Title from './Title'
 import Text from './Text'
@@ -6,12 +12,12 @@ import Actions from './Actions'
 
 const Popup = styled.div`
     box-sizing: border-box;
-    padding: 2rem;
-    border-radius: 12px;
-    max-width: 400px;
-    background: rgba(255, 255, 255, 0.90);
-    backdrop-filter: blur(50px) brightness(100%) opacity(100%);
-    box-shadow: ${({ theme }) => theme.elevations[0]};
+    padding: 1rem;
+    border-radius: ${borderRadius};
+    max-width: 381px;
+    background: ${colorSecondary90};
+    backdrop-filter: ${backgroundBlur2};
+    box-shadow: ${elevation1};
 `
 
 Popup.Title = Title

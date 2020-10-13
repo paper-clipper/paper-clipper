@@ -13,8 +13,8 @@ export default () => {
                     <Popup.Title>Remove this file? {'🗑'}</Popup.Title>
                     <Popup.Text>Remember file will be only removed from the application and it steel exisit on the hard drive.</Popup.Text>
                     <Popup.Actions>
-                        <Button.Text>Cancel</Button.Text>
-                        <Button.Text modifiers="primary">Remove</Button.Text>
+                        <Button.Text modifiers="secondary">Cancel</Button.Text>
+                        <Button.Text>Remove</Button.Text>
                     </Popup.Actions>
                 </Popup>
             </Overlay>
