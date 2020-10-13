@@ -9,6 +9,7 @@ import Modal from './Modal'
 import TextInput from './TextInput'
 import FileInput from './FileInput'
 import Upload from './Upload'
+import Search from './Search'
 
 export {
     File,
@@ -22,4 +23,5 @@ export {
     TextInput,
     FileInput,
     Upload,
+    Search,
 }
