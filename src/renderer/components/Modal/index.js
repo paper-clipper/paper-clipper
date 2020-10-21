@@ -1,12 +1,15 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import { Modal } from '@paper/layout/components'
 import { Overlay, Button } from '@paper/layout/elements'
 
+import Form from '@paper/components/Form'
 import Portal from '@paper/components/Portal'
-import TextInput from '@paper/components/TextInput'
+import TextField from '@paper/components/TextField'
+import MultiSelectField from '@paper/components/MultiSelectField'
 import FileInput from '@paper/components/FileInput'
-// import Upload from '@paper/components/Upload'
 
 export default () => {
     return (
@@ -14,20 +17,31 @@ export default () => {
             <Overlay>
                 <Modal>
                     <Modal.Header>
+                        <Modal.Actions>
+                            <FontAwesomeIcon
+                                icon={faTimes}
+                                fixedWidth
+                            />
+                        </Modal.Actions>
                         <Modal.Title>Add file {'📁'}</Modal.Title>
                         <Modal.Subtitle>Add new file to your library</Modal.Subtitle>
                     </Modal.Header>
                     <Modal.Content>
-                        <TextInput
-                            name="file-name"
-                            placeholder="File name"
-                        />
-                        {/* <Upload /> */}
-                        <FileInput />
+                        <Form>
+                            <TextField
+                                name="file-name"
+                                placeholder="File name"
+                            />
+                            <MultiSelectField
+                                name="tags"
+                                placeholder="Tags"
+                            />
+                            <FileInput />
+                        </Form>
                     </Modal.Content>
                     <Modal.Footer>
-                        <Button.Text>Cancel</Button.Text>
-                        <Button.Text modifiers="primary">Add</Button.Text>
+                        <Button.Text modifiers="secondary">Cancel</Button.Text>
+                        <Button.Text>Add</Button.Text>
                     </Modal.Footer>
                 </Modal>
             </Overlay>
