@@ -1,4 +1,9 @@
 import styled from 'styled-components'
+import {
+    colorSecondary,
+    colorSecondaryDarker,
+    borderRadius,
+} from '@paper/layout/mixins'
 
 import File from './File'
 import Info from './Info'
@@ -11,12 +16,12 @@ const Upload = styled.div`
     display: grid;
     grid-template-columns: auto 1fr auto;
     column-gap: 0.75rem;
-    background: ${({ theme }) => theme.colors.white};
-    border: 1px solid ${({ theme }) => theme.colors.whiteDarker};
+    background: ${colorSecondary};
+    border: 1px solid ${colorSecondaryDarker};
     width: 100%;
     height: 48px;
     padding: 0 1.5rem;
-    border-radius: 12px;
+    border-radius: ${borderRadius};
     box-sizing: border-box;
 `
 
