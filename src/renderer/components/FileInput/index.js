@@ -1,18 +1,18 @@
 import React from 'react'
 
-import { FileInput } from '@paper/layout/components'
+import { FileField } from '@paper/layout/components'
 
 export default () => {
     return (
-        <FileInput>
-            <FileInput.Label>
-                <FileInput.Input
+        <FileField>
+            <FileField.Label>
+                <FileField.Input
                     type="file"
                 />
-                <FileInput.Tooltip>
-                    Drop files here to add or <FileInput.Action>browse file</FileInput.Action>
-                </FileInput.Tooltip>
-            </FileInput.Label>
-        </FileInput>
+                <FileField.Tooltip>
+                    Drop files here to add or <FileField.Action>browse file</FileField.Action>
+                </FileField.Tooltip>
+            </FileField.Label>
+        </FileField>
     )
 }

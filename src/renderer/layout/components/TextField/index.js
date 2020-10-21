@@ -2,10 +2,11 @@ import styled from 'styled-components'
 
 import Input from './Input'
 
-const TextInput = styled.div`
+const TextField = styled.div`
     display: inline-flex;
+    width: 100%;
 `
 
-TextInput.Input = Input
+TextField.Input = Input
 
-export default TextInput
+export default TextField

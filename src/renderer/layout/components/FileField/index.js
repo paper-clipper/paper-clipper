@@ -5,15 +5,15 @@ import Label from './Label'
 import Tooltip from './Tooltip'
 import Action from './Action'
 
-const FileInput = styled.div`
+const FileField = styled.div`
     display: inline-flex;
     width: 100%;
     height: 96px;
 `
 
-FileInput.Input = Input
-FileInput.Label = Label
-FileInput.Tooltip = Tooltip
-FileInput.Action = Action
+FileField.Input = Input
+FileField.Label = Label
+FileField.Tooltip = Tooltip
+FileField.Action = Action
 
-export default FileInput
+export default FileField

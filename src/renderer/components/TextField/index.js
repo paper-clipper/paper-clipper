@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 
-import { TextInput } from '@paper/layout/components'
+import { TextField } from '@paper/layout/components'
 
 export default forwardRef(({
     name,
@@ -10,8 +10,8 @@ export default forwardRef(({
 }, ref) => {
 
     return (
-        <TextInput>
-            <TextInput.Input
+        <TextField>
+            <TextField.Input
                 id={name}
                 name={name}
                 ref={ref}
@@ -19,6 +19,6 @@ export default forwardRef(({
                 modifiers={[ error && 'invalid' ]}
                 {...props}
             />
-        </TextInput>
+        </TextField>
     )
 })
