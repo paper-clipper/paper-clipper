@@ -1,9 +1,13 @@
 import styled from 'styled-components'
+import {
+    fontSecondary,
+    colorPrimary,
+} from '@paper/layout/mixins'
 
 export default styled.h4`
-    font-family: ${({ theme }) => theme.fonts.secondary};
-    color: ${({ theme }) => theme.colors.black};
-    font-size: 1.25rem;
+    font-family: ${fontSecondary};
+    color: ${colorPrimary};
+    font-size: 1rem;
     font-weight: 700;
     line-height: 1.25;
 `

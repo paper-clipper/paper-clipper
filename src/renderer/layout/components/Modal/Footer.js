@@ -1,4 +1,7 @@
 import styled from 'styled-components'
+import {
+    colorSecondaryDarker,
+} from '@paper/layout/mixins'
 
 export default styled.div`
     width: 100%;
@@ -7,5 +10,5 @@ export default styled.div`
     justify-content: flex-end;
     padding: 1.5rem 2rem;
     box-sizing: border-box;
-    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    border-top: 1px solid ${colorSecondaryDarker};
 `
