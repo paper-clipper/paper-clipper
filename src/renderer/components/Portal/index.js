@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom'
-import usePortal from '../../hooks/usePortal'
+import usePortal from '@paper/hooks/usePortal'
 
 const Portal = ({ id = 'portal', children }) => {
     const target = usePortal(id)

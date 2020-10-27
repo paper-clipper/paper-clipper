@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { Dropdown } from '../../layout/components'
+import { Dropdown } from '@paper/layout/components'
 
 export default forwardRef(({ items = [] }, ref) => {
     return (

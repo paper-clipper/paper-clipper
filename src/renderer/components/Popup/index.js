@@ -2,8 +2,8 @@ import React from 'react'
 
 import Portal from '../Portal'
 
-import { Popup } from '../../layout/components'
-import { Overlay, Button } from '../../layout/elements'
+import { Popup } from '@paper/layout/components'
+import { Overlay, Button } from '@paper/layout/elements'
 
 export default () => {
     return (
