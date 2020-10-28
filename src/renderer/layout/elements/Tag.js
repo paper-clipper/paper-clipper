@@ -16,4 +16,6 @@ export default styled.span`
     padding: 0.5rem 0.75rem;
     margin: 2px;
     border-radius: 5rem;
+    user-select: none;
+    outline: none;
 `
