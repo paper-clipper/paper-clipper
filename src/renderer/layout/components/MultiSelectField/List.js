@@ -6,10 +6,6 @@ import {
 } from '@paper/layout/mixins'
 
 export default styled.ul`
-    position: absolute;
-    top: calc(100% + 4px);
-    left: 0;
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,5 +13,4 @@ export default styled.ul`
     background: ${colorSecondary};
     border-radius: ${borderRadius};
     border: 1px solid ${colorSecondaryDarker};
-    z-index: 99;
 `

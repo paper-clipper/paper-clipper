@@ -1,22 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useCombobox, useMultipleSelection } from 'downshift'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import { MultiSelectField } from '@paper/layout/components'
-import { Button } from '@paper/layout/elements'
+import { Button, Tag } from '@paper/layout/elements'
 
 export default ({
     name,
     placeholder,
     items = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neputun'],
 }) => {
-    const [inputValue, setInputValue] = useState('')
+
+    const [ inputValue, setInputValue ] = useState('')
+    const [ widthValue, setWidthValue ] = useState(0)
     const {
         getDropdownProps,
         addSelectedItem,
         selectedItems,
+        getSelectedItemProps,
+        removeSelectedItem,
     } = useMultipleSelection({ initialSelectedItems: [] })
+    const ref = useRef(null)
+
+    useEffect(() => {
+        const width = ref.current.offsetWidth
+        setWidthValue(width)
+    }, [ selectedItems ])
 
     const getFilteredItems = () =>
         items.filter(
@@ -72,28 +82,30 @@ export default ({
         onStateChange,
     })
     return (
-        /* <div>
-            {selectedItems.map((selectedItem, index) => (
-                <span
-                    key={`selected-item-${index}`}
-                    {...getSelectedItemProps({ selectedItem, index })}
-                >
-                    {selectedItem}
-                    <span
-                        onClick={e => {
-                            e.stopPropagation()
-                            removeSelectedItem(selectedItem)
-                        }}
-                    >
-                        &#10005;
-          </span>
-                </span>
-            ))} */
         <MultiSelectField {...getComboboxProps()}>
+            <MultiSelectField.Tags ref={ref}>
+                {selectedItems.map((selectedItem, index) => (
+                    <Tag
+                        key={`selected-item-${index}`}
+                        {...getSelectedItemProps({ selectedItem, index })}
+                    >
+                        {selectedItem}
+                        <FontAwesomeIcon
+                            icon={faTimes}
+                            fixedWidth
+                            onClick={e => {
+                                e.stopPropagation()
+                                removeSelectedItem(selectedItem)
+                            }}
+                        />
+                    </Tag>
+                ))}
+            </MultiSelectField.Tags>
             <MultiSelectField.Input
                 name={name}
                 id={name}
                 placeholder={placeholder}
+                style={{ paddingLeft: `${widthValue + 24}px` }}
                 {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
                 modifiers="append"
             />
@@ -105,18 +117,20 @@ export default ({
                     />
                 </Button.Text>
             </MultiSelectField.Group>
-            {isOpen && (
-                <MultiSelectField.List {...getMenuProps()}>
-                    {getFilteredItems(items).map((item, index) => (
-                        <MultiSelectField.Item
-                            key={`${item}${index}`}
-                            {...getItemProps({ item, index })}
-                        >
-                            {item}
-                        </MultiSelectField.Item>
-                    ))}
-                </MultiSelectField.List>
-            )}
+            <MultiSelectField.Dropdown {...getMenuProps()}>
+                {(isOpen && getFilteredItems(items).length > 0) && (
+                    <MultiSelectField.List>
+                        {getFilteredItems(items).map((item, index) => (
+                            <MultiSelectField.Item
+                                key={`${item}${index}`}
+                                {...getItemProps({ item, index })}
+                            >
+                                {item}
+                            </MultiSelectField.Item>
+                        ))}
+                    </MultiSelectField.List>
+                )}
+            </MultiSelectField.Dropdown>
         </MultiSelectField>
     )
 }

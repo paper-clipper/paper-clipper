@@ -6,8 +6,10 @@ import {
 
 import Input from './Input'
 import Group from './Group'
+import Dropdown from './Dropdown'
 import List from './List'
 import Item from './Item'
+import Tags from './Tags'
 
 const MultiSelectField = styled.div`
     display: inline-flex;
@@ -19,7 +21,9 @@ const MultiSelectField = styled.div`
 
 MultiSelectField.Input = Input
 MultiSelectField.Group = Group
+MultiSelectField.Dropdown = Dropdown
 MultiSelectField.List = List
 MultiSelectField.Item = Item
+MultiSelectField.Tags = Tags
 
 export default MultiSelectField
