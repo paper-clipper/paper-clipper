@@ -3,8 +3,8 @@ import { useCombobox, useMultipleSelection } from 'downshift'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faTimes } from '@fortawesome/free-solid-svg-icons'
 
-import { MultiSelectField } from '@paper/layout/components'
-import { Button, Tag } from '@paper/layout/elements'
+import { Field, Select } from '@paper/layout/forms'
+import { Tag, Button } from '@paper/layout/elements'
 
 export default ({
     name,
@@ -81,9 +81,10 @@ export default ({
         stateReducer,
         onStateChange,
     })
+
     return (
-        <MultiSelectField {...getComboboxProps()}>
-            <MultiSelectField.Tags ref={ref}>
+        <Field {...getComboboxProps()}>
+            <Field.Inside ref={ref}>
                 {selectedItems.map((selectedItem, index) => (
                     <Tag
                         key={`selected-item-${index}`}
@@ -100,37 +101,40 @@ export default ({
                         />
                     </Tag>
                 ))}
-            </MultiSelectField.Tags>
-            <MultiSelectField.Input
-                name={name}
-                id={name}
-                placeholder={placeholder}
-                style={{ paddingLeft: `${widthValue + 24}px` }}
-                {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
-                modifiers="append"
-            />
-            <MultiSelectField.Group modifiers="append">
-                <Button.Text modifiers="icon" {...getToggleButtonProps()} aria-label={'toggle menu'}>
-                    <FontAwesomeIcon
-                        icon={faChevronDown}
-                        fixedWidth
-                    />
-                </Button.Text>
-            </MultiSelectField.Group>
-            <MultiSelectField.Dropdown {...getMenuProps()}>
-                {(isOpen && getFilteredItems(items).length > 0) && (
-                    <MultiSelectField.List>
+            </Field.Inside>
+            <Field.Group modifiers="append">
+                <Field.Input
+                    name={name}
+                    id={name}
+                    placeholder={placeholder}
+                    style={{ paddingLeft: `${widthValue + 24}px` }}
+                    {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
+                    modifiers="append"
+                />
+                <Field.Group modifiers="beside">
+                    <Button.Text modifiers="icon" {...getToggleButtonProps()} aria-label={'toggle menu'}>
+                        <FontAwesomeIcon
+                            icon={faChevronDown}
+                            fixedWidth
+                        />
+                    </Button.Text>
+                </Field.Group>
+            </Field.Group>
+            <Select {...getMenuProps()}>
+                {isOpen  && (
+                    <Select.List>
                         {getFilteredItems(items).map((item, index) => (
-                            <MultiSelectField.Item
+                            <Select.Item
                                 key={`${item}${index}`}
                                 {...getItemProps({ item, index })}
                             >
                                 {item}
-                            </MultiSelectField.Item>
+                            </Select.Item>
                         ))}
-                    </MultiSelectField.List>
+                        {inputValue && <Select.Item>Create: {inputValue}</Select.Item>}
+                    </Select.List>
                 )}
-            </MultiSelectField.Dropdown>
-        </MultiSelectField>
+            </Select>
+        </Field>
     )
 }

@@ -3,13 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import { Modal } from '@paper/layout/components'
+import { Form } from '@paper/layout/forms'
 import { Overlay, Button } from '@paper/layout/elements'
 
-import Form from '@paper/components/Form'
+import { TextInput, MultiSelectInput, FileInput } from '@paper/components/forms'
 import Portal from '@paper/components/Portal'
-import TextField from '@paper/components/TextField'
-import MultiSelectField from '@paper/components/MultiSelectField'
-import FileInput from '@paper/components/FileInput'
 
 export default () => {
     return (
@@ -28,11 +26,11 @@ export default () => {
                     </Modal.Header>
                     <Modal.Content>
                         <Form>
-                            <TextField
+                            <TextInput
                                 name="file-name"
                                 placeholder="File name"
                             />
-                            <MultiSelectField
+                            <MultiSelectInput
                                 name="tags"
                                 placeholder="Tags"
                             />
