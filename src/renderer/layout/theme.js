@@ -9,6 +9,7 @@ export const theme = {
         secondary75: 'rgba(255, 255, 255, 0.75)',
         secondaryDarker: '#f7f7f9',
         neutral: '#a7a6ab',
+        error: '#ff6071',
     },
     borderRadius: '12px',
     elevations: [

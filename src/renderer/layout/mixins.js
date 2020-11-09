@@ -7,6 +7,7 @@ export const colorSecondary90 = ({ theme }) => theme.newTheme.colors.secondary90
 export const colorSecondary75 = ({ theme }) => theme.newTheme.colors.secondary75
 export const colorSecondaryDarker = ({ theme }) => theme.newTheme.colors.secondaryDarker
 export const colorNeutral = ({ theme }) => theme.newTheme.colors.neutral
+export const colorError = ({ theme }) => theme.newTheme.colors.error
 
 export const borderRadius = ({ theme }) => theme.newTheme.borderRadius
 
