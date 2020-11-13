@@ -5,49 +5,53 @@ import { Text, Anchor } from '@paper/layout/elements'
 
 export default ({
     name,
-    onFile = () => null,
+    onChange = () => null,
 }) => {
 
-    const [ isActive, setIsActive ] = useState(false)
-    const [ isLoaded, setIsLoaded ] = useState(false)
-    const [ file, setFile ] = useState(null)
+    // const [ isActive, setIsActive ] = useState(false)
+    // const [ isLoaded, setIsLoaded ] = useState(false)
+    // const [ file, setFile ] = useState(null)
 
     const handleOnChange = e => {
 
-        const reader = new FileReader()
-        const file = e.dataTransfer
-            ? e.dataTransfer.files[0]
-            : e.target.files[0]
+        const files = e.dataTransfer
+            ? e.dataTransfer.files
+            : e.target.files
 
-        console.log(file)
-
-        reader.onload = () => {
-            setFile(reader.result)
-            setIsLoaded(true)
-            onFile(({ target: { name, value: reader.result } }))
-        }
-
-        reader.readAsDataURL(file)
+        onChange(({
+            target: {
+                name,
+                value: Array.from(files).map(file => ({
+                    name: file.name,
+                    path: file.path,
+                    extension: file.name.split('.').pop(),
+                })),
+            },
+        }))
 
     }
 
     const handleOnDrop = e => {
         e.preventDefault()
-        setIsActive(false)
+        // setIsActive(false)
         handleOnChange(e)
     }
 
     return (
         <Field>
             <Field.Label
+                htmlFor={name}
                 modifiers={[ 'input', 'border-dashed', 'align-center' ]}
-                onDragEnter={() => setIsActive(true)}
-                onDragLeave={() => setIsActive(false)}
+                // onDragEnter={() => setIsActive(true)}
+                // onDragLeave={() => setIsActive(false)}
                 onDragOver={e => e.preventDefault()}
                 onDrop={handleOnDrop}
             >
                 <Field.Input
+                    id={name}
+                    name={name}
                     type="file"
+                    multiple={true}
                     hidden={true}
                     onChange={handleOnChange}
                 />

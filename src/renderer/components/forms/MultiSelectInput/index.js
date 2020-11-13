@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useCombobox, useMultipleSelection } from 'downshift'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faChevronUp, faChevronDown, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import { Field, Select } from '@paper/layout/forms'
 import { Tag, Button } from '@paper/layout/elements'
@@ -10,10 +10,11 @@ export default ({
     name,
     placeholder,
     items = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neputun'],
+    onChange = () => null,
 }) => {
 
-    const [ inputValue, setInputValue ] = useState('')
-    const [ widthValue, setWidthValue ] = useState(0)
+    const [inputValue, setInputValue] = useState('')
+    const [widthValue, setWidthValue] = useState(0)
     const {
         getDropdownProps,
         addSelectedItem,
@@ -26,7 +27,8 @@ export default ({
     useEffect(() => {
         const width = ref.current.offsetWidth
         setWidthValue(width)
-    }, [ selectedItems ])
+        onChange({ target: { name, value: selectedItems }})
+    }, [selectedItems])
 
     const getFilteredItems = () =>
         items.filter(
@@ -48,6 +50,13 @@ export default ({
         return changes
     }
 
+    const addItem = selectedItem => {
+        if (selectedItem) {
+            setInputValue('')
+            addSelectedItem(selectedItem)
+        }
+    }
+
     const onStateChange = ({ inputValue, type, selectedItem }) => {
         switch (type) {
             case useCombobox.stateChangeTypes.InputChange:
@@ -56,10 +65,7 @@ export default ({
             case useCombobox.stateChangeTypes.InputKeyDownEnter:
             case useCombobox.stateChangeTypes.ItemClick:
             case useCombobox.stateChangeTypes.InputBlur:
-                if (selectedItem) {
-                    setInputValue('')
-                    addSelectedItem(selectedItem)
-                }
+                addItem(selectedItem)
                 break
             default:
                 break
@@ -73,6 +79,8 @@ export default ({
         getInputProps,
         getComboboxProps,
         getItemProps,
+        openMenu,
+        closeMenu,
     } = useCombobox({
         inputValue,
         defaultHighlightedIndex: 0, // after selection, highlight the first item.
@@ -81,6 +89,13 @@ export default ({
         stateReducer,
         onStateChange,
     })
+
+    const handleToggleButton = e => {
+        e.preventDefault()
+        if (!isOpen)
+            return openMenu()
+        return closeMenu()
+    }
 
     return (
         <Field {...getComboboxProps()}>
@@ -112,16 +127,21 @@ export default ({
                     modifiers="append"
                 />
                 <Field.Group modifiers="beside">
-                    <Button.Text modifiers="icon" {...getToggleButtonProps()} aria-label={'toggle menu'}>
+                    <Button.Text
+                        modifiers="icon"
+                        aria-label={'toggle menu'}
+                        {...getToggleButtonProps()}
+                        onClick={handleToggleButton}
+                    >
                         <FontAwesomeIcon
-                            icon={faChevronDown}
+                            icon={!isOpen ? faChevronDown : faChevronUp}
                             fixedWidth
                         />
                     </Button.Text>
                 </Field.Group>
             </Field.Group>
             <Select {...getMenuProps()}>
-                {isOpen  && (
+                {isOpen && (
                     <Select.List>
                         {getFilteredItems(items).map((item, index) => (
                             <Select.Item
@@ -131,7 +151,13 @@ export default ({
                                 {item}
                             </Select.Item>
                         ))}
-                        {inputValue && <Select.Item>Create: {inputValue}</Select.Item>}
+                        {inputValue && (
+                            <Select.Item
+                                onClick={() => addItem(inputValue)}
+                            >
+                                Create &quot;{inputValue}&quot;
+                            </Select.Item>
+                        )}
                     </Select.List>
                 )}
             </Select>

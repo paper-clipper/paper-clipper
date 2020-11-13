@@ -5,6 +5,6 @@ export default styled.div`
     flex-direction: column;
     width: 100%;
     height: 100%;
-    padding: 2rem;
+    padding: 1.5rem 2rem;
     box-sizing: border-box;
 `
