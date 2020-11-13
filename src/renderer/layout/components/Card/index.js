@@ -4,6 +4,7 @@ import {
     elevation1,
     transition1,
     borderRadius,
+    colorSecondaryDarker,
 } from '@paper/layout/mixins'
 
 import Actions from './Actions'
@@ -24,6 +25,7 @@ const Card = styled.div`
     margin: 0.75rem;
     background: ${colorSecondary};
     box-shadow: ${elevation1};
+    border: 1px solid ${colorSecondaryDarker};
     border-radius: ${borderRadius};
     cursor: pointer;
     transition: all ${transition1};
