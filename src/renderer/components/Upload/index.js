@@ -3,21 +3,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import { Upload } from '@paper/layout/components'
+import { Button } from '@paper/layout/elements'
 
 import File from '@paper/components/File'
 
-export default () => {
+export default ({
+    name,
+    path,
+    extension,
+    onRemove = () => null,
+}) => {
     return (
         <Upload>
             <Upload.File>
-                <File extension={'pdf'} />
+                <File extension={extension} />
             </Upload.File>
             <Upload.Info>
-                <Upload.Title>invoice_may_2020.pdf</Upload.Title>
-                <Upload.Meta>/Users/dummy/Documents/Invoices/invoice_may_2020.pdf</Upload.Meta>
+                <Upload.Title>{name}</Upload.Title>
+                <Upload.Meta>{path}</Upload.Meta>
             </Upload.Info>
             <Upload.Actions>
-                <Upload.Action>
+                <Upload.Action
+                    onClick={onRemove}
+                >
                     <FontAwesomeIcon icon={faTrash} fixedWidth />
                 </Upload.Action>
             </Upload.Actions>
