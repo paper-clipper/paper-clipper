@@ -17,7 +17,7 @@ const GROUP_MODIFIERS = {
         justify-content: center;
         align-items: center;
         width: auto;
-        padding: 0 1rem;
+        padding: 0 0.5rem;
         box-sizing: border-box;
         border: none;
     `,
