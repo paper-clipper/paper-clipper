@@ -48,11 +48,11 @@ const Button = styled.button`
 const TEXT_BUTTON_MODIFIERS = {
 
     'primary': theme => css`
-        color: ${colorPrimary(theme)}
+        color: ${colorPrimary(theme)};
     `,
 
     'secondary': theme => css`
-        color: ${colorPrimary50(theme)}
+        color: ${colorPrimary50(theme)};
     `,
 
 }
