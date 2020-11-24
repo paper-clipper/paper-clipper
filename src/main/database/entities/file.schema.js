@@ -16,6 +16,10 @@ module.exports = new EntitySchema({
             type: 'varchar',
             nullable: false,
         },
+        extension: {
+            type: 'varchar',
+            nullable: false,
+        },
         path: {
             type: 'varchar',
             nullable: false,

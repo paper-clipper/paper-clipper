@@ -30,13 +30,13 @@ module.exports = new EntitySchema({
     relations: {
         files: {
             target: 'File',
-            type: 'one-to-many',
+            type: 'many-to-many',
             joinTable: true,
             cascade: true,
         },
         tags: {
             target: 'Tag',
-            type: 'one-to-many',
+            type: 'many-to-many',
             joinTable: true,
             cascade: true,
         },
