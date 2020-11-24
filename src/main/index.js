@@ -3,15 +3,13 @@
 'use strict'
 
 // Import parts of electron to use
-const { app, shell, BrowserWindow } = require('electron')
-const { ipcMain } = require('electron')
+const { app, shell, ipcMain, BrowserWindow } = require('electron')
 const path = require('path')
 const url = require('url')
 const { connectToDatabase, getTagsService, getFilesService, getPaperClippersService } = require('./database')
 
 // Add React extension for development
 const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer')
-
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -144,4 +142,35 @@ app.on('activate', () => {
 	if (mainWindow === null)
 		createWindow()
 
+})
+
+ipcMain.handle('create-clip', async (event, clip) => {
+
+    const tagsService = getTagsService()
+    const filesService = getFilesService()
+    const paperClippersService = getPaperClippersService()
+
+    const tags = await Promise.all(
+        clip.tags.map(tag => tagsService.create({ name: tag }))
+    )
+
+    const files = await Promise.all(
+        clip.files.map(file => filesService.create(file))
+    )
+
+    return paperClippersService.create({
+        ...clip,
+        tags,
+        files,
+    })
+
+})
+
+ipcMain.handle('fetch-clips', () => {
+    const paperClippersService = getPaperClippersService()
+    return paperClippersService.find()
+})
+
+ipcMain.handle('open-file', (event, files) => {
+    return Promise.all(files.map(file => shell.openPath(file.path)))
 })
