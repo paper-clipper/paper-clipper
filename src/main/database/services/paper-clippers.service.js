@@ -5,14 +5,21 @@ module.exports = connection => ({
 
     paperClippersRepository: connection.getRepository(PaperClipSchema),
 
-    async create(paperClip) {
+    create(paperClip) {
         return this.paperClippersRepository.save(
             this.paperClippersRepository.create(new PaperClip(paperClip))
         )
     },
 
-    async findOne(query) {
+    findOne(query) {
         return this.paperClippersRepository.findOne(query)
+    },
+
+    find(query = {}) {
+        return this.paperClippersRepository.find({
+            ...query,
+            relations: [ 'files', 'tags' ],
+        })
     },
 
 })
