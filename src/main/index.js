@@ -136,11 +136,16 @@ ipcMain.handle('create-clip', async (event, clip) => {
 
 })
 
-ipcMain.handle('fetch-clips', () => {
+ipcMain.handle('fetch-clips', (event, query) => {
     const paperClippersService = getPaperClippersService()
-    return paperClippersService.find()
+    return paperClippersService.find(query)
 })
 
-ipcMain.handle('open-file', (event, files) => {
+ipcMain.handle('fetch-clips-like', (event, query) => {
+    const paperClippersService = getPaperClippersService()
+    return paperClippersService.findLike(query)
+})
+
+ipcMain.handle('open-files', (event, files) => {
     return Promise.all(files.map(file => shell.openPath(file.path)))
 })
