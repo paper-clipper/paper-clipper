@@ -89,41 +89,11 @@ function createWindow () {
 
 }
 
-const createData = async () => {
-
-    const tagsService = getTagsService()
-    const filesService = getFilesService()
-    const paperClippersService = getPaperClippersService()
-
-    const tags = await Promise.all([
-        tagsService.create({  name: 'Document' }),
-        tagsService.create({  name: 'Invoices' }),
-        tagsService.create({  name: 'Tag' }),
-        tagsService.create({  name: 'Tag' }),
-        tagsService.create({  name: 'Tag' }),
-    ])
-
-    const file = await filesService.create({
-        name: 'invoice_may_2020.pdf',
-        extension: 'pdf',
-        path: '/Users/wojciech/Desktop/invoice_may_2020.pdf',
-    })
-
-    await paperClippersService.create({
-        name: 'Invoice 05/2020',
-        files: [ file ],
-        tags,
-    })
-        .then(console.log)
-
-}
-
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
     await connectToDatabase()
-    await createData()
     createWindow()
 })
 
