@@ -1,3 +1,4 @@
+const { Like } = require('typeorm')
 const PaperClipSchema = require('../entities/paper-clip.schema')
 const PaperClip = require('../models/paper-clip.model')
 
@@ -18,6 +19,15 @@ module.exports = connection => ({
     find(query = {}) {
         return this.paperClippersRepository.find({
             ...query,
+            relations: [ 'files', 'tags' ],
+        })
+    },
+
+    findLike(query = {}) {
+        return this.paperClippersRepository.find({
+            where: {
+                name: Like(`%${query.name}%`),
+            },
             relations: [ 'files', 'tags' ],
         })
     },
