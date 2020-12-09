@@ -9,7 +9,7 @@ import { Tag, Button } from '@paper/layout/elements'
 export default ({
     name,
     placeholder,
-    items = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neputun'],
+    items = [],
     onChange = () => null,
 }) => {
 
@@ -28,7 +28,7 @@ export default ({
         const width = ref.current.offsetWidth
         setWidthValue(width)
         onChange({ target: { name, value: selectedItems }})
-    }, [selectedItems])
+    }, [ selectedItems ])
 
     const getFilteredItems = () =>
         items.filter(
