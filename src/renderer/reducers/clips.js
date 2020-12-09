@@ -2,6 +2,9 @@ import {
     FETCH_CLIPS_REQUEST,
     FETCH_CLIPS_SUCCESS,
     FETCH_CLIPS_FAILURE,
+    FETCH_CLIPS_LIKE_REQUEST,
+    FETCH_CLIPS_LIKE_SUCCESS,
+    FETCH_CLIPS_LIKE_FAILURE,
     CREATE_CLIP_REQUEST,
     CREATE_CLIP_SUCCESS,
     CREATE_CLIP_FAILURE,
@@ -23,6 +26,15 @@ export default (state = initialState, { type, payload }) => {
         return { ...state, data: payload, loading: false, error: null }
 
     case FETCH_CLIPS_FAILURE:
+        return { ...state, error: payload, loading: false }
+
+    case FETCH_CLIPS_LIKE_REQUEST:
+        return { ...state, loading: true, error: null }
+
+    case FETCH_CLIPS_LIKE_SUCCESS:
+        return { ...state, data: payload, loading: false, error: null }
+
+    case FETCH_CLIPS_LIKE_FAILURE:
         return { ...state, error: payload, loading: false }
 
     case CREATE_CLIP_REQUEST:

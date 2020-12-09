@@ -4,17 +4,17 @@ export const FETCH_CLIPS_REQUEST = 'FETCH_CLIPS_REQUEST'
 export const FETCH_CLIPS_SUCCESS = 'FETCH_CLIPS_SUCCESS'
 export const FETCH_CLIPS_FAILURE = 'FETCH_CLIPS_FAILURE'
 
-export const fetchClipsRequest = (payload) => ({
+export const fetchClipsRequest = payload => ({
     type: FETCH_CLIPS_REQUEST,
     payload,
 })
 
-export const fetchClipsSuccess = (payload) => ({
+export const fetchClipsSuccess = payload => ({
     type: FETCH_CLIPS_SUCCESS,
     payload,
 })
 
-export const fetchClipsFailure = (payload) => ({
+export const fetchClipsFailure = payload => ({
     type: FETCH_CLIPS_FAILURE,
     payload,
 })
@@ -23,6 +23,33 @@ export const fetchClips = (query = {}) =>
     dispatch => {
         dispatch(fetchClipsRequest())
         return ipcRenderer.invoke('fetch-clips', query)
+            .then(payload => dispatch(fetchClipsSuccess(payload)))
+            .catch(error => dispatch(fetchClipsFailure(error)))
+    }
+
+export const FETCH_CLIPS_LIKE_REQUEST = 'FETCH_CLIPS_LIKE_REQUEST'
+export const FETCH_CLIPS_LIKE_SUCCESS = 'FETCH_CLIPS_LIKE_SUCCESS'
+export const FETCH_CLIPS_LIKE_FAILURE = 'FETCH_CLIPS_LIKE_FAILURE'
+
+export const fetchClipsLikeRequest = payload => ({
+    type: FETCH_CLIPS_LIKE_REQUEST,
+    payload,
+})
+
+export const fetchClipsLikeSuccess = payload => ({
+    type: FETCH_CLIPS_LIKE_SUCCESS,
+    payload,
+})
+
+export const fetchClipsLikeFailure = payload => ({
+    type: FETCH_CLIPS_LIKE_FAILURE,
+    payload,
+})
+
+export const fetchClipsLike = (query = {}) =>
+    dispatch => {
+        dispatch(fetchClipsRequest())
+        return ipcRenderer.invoke('fetch-clips-like', query)
             .then(payload => dispatch(fetchClipsSuccess(payload)))
             .catch(error => dispatch(fetchClipsFailure(error)))
     }
