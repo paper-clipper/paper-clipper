@@ -11,7 +11,6 @@ const Field = styled.div`
     flex-direction: column;
     position: relative;
     width: 100%;
-    margin: 0.25rem 0;
 `
 
 Field.Input = Input
