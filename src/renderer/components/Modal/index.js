@@ -1,5 +1,6 @@
 import React from 'react'
 import { useFormik } from 'formik'
+import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
@@ -11,18 +12,22 @@ import { TextInput, MultiSelectInput, FileInput } from '@paper/components/forms'
 import Portal from '@paper/components/Portal'
 import Upload from '@paper/components/Upload'
 
+import { createClip } from '@paper/actions'
+
 export default ({
     onClose = () => null,
 }) => {
 
+    const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
-            fileName: '',
+            name: '',
             tags: [],
             files: [],
         },
         onSubmit: values => {
-            alert(JSON.stringify(values, null, 2))
+            dispatch(createClip(values))
+                .then(() => onClose())
         },
     })
 
@@ -43,7 +48,7 @@ export default ({
                     <Modal.Content>
                         <Form onSubmit={formik.handleSubmit}>
                             <TextInput
-                                name="fileName"
+                                name="name"
                                 placeholder="File name"
                                 onChange={formik.handleChange}
                                 value={formik.values.firstName}
@@ -70,7 +75,11 @@ export default ({
                         >
                             Cancel
                         </Button.Text>
-                        <Button.Text>Add</Button.Text>
+                        <Button.Text
+                            onClick={() => formik.submitForm()}
+                        >
+                            Add
+                        </Button.Text>
                     </Modal.Footer>
                 </Modal>
             </Overlay>
