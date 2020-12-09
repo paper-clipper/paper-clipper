@@ -7,7 +7,9 @@ import Search from '@paper/components/Search'
 export default () => {
     return (
         <Header>
-            <Search onSearch={console.log} />
+            <Header.Search>
+                <Search />
+            </Header.Search>
         </Header>
     )
 }
