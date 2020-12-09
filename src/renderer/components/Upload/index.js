@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 import { Upload } from '@paper/layout/components'
-import { Button } from '@paper/layout/elements'
 
 import File from '@paper/components/File'
 
