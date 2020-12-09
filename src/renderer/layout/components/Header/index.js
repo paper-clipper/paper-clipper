@@ -4,6 +4,8 @@ import {
     backgroundBlur2,
 } from '@paper/layout/mixins'
 
+import Search from './Search'
+
 const Header = styled.header`
     width: 100%;
     height: 100%;
@@ -13,5 +15,7 @@ const Header = styled.header`
     justify-content: center;
     align-items: center;
 `
+
+Header.Search = Search
 
 export default Header
