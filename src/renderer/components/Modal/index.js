@@ -42,6 +42,16 @@ export default ({
         })
     }
 
+    const handleRemoveFile = file => {
+        const { files } = formik.values
+        formik.handleChange({
+            target: {
+                name: 'files',
+                value: files.filter(f => f.path !== file.path),
+            },
+        })
+    }
+
     return (
         <Portal>
             <Overlay>
@@ -76,7 +86,11 @@ export default ({
                             />
                         </Form>
                         {(formik.values.files || []).map((item, index) => (
-                            <Upload key={index} {...item} />
+                            <Upload
+                                key={index}
+                                {...item}
+                                onRemove={() => handleRemoveFile(item)}
+                            />
                         ))}
                     </Modal.Content>
                     <Modal.Footer>
