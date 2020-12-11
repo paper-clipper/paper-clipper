@@ -31,6 +31,17 @@ export default ({
         },
     })
 
+    const handleOnFileChange = e => {
+        const { name, value } = e.target
+        const { files } = formik.values
+        formik.handleChange({
+            target: {
+                name,
+                value: [ ...value, ...files ],
+            },
+        })
+    }
+
     return (
         <Portal>
             <Overlay>
@@ -61,7 +72,7 @@ export default ({
                             />
                             <FileInput
                                 name="files"
-                                onChange={formik.handleChange}
+                                onChange={handleOnFileChange}
                             />
                         </Form>
                         {(formik.values.files || []).map((item, index) => (
