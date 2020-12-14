@@ -37,7 +37,7 @@ function createWindow () {
 		height: 608, // height of the window
         show: false, // don't show until window is ready
         transparent: true,
-        frame: false,
+        frame: process.platform !== 'darwin',
         titleBarStyle: 'hiddenInset',
 		webPreferences: {
             nodeIntegration: true,
@@ -45,7 +45,7 @@ function createWindow () {
 	})
 
 	// and load the index.html of the app.
-	let indexPath
+    let indexPath
 
 	// Determine the correct index.html file
 	// (created by webpack) to load in dev and production
@@ -66,6 +66,11 @@ function createWindow () {
 
 	// Load the index.html
 	mainWindow.loadURL(indexPath)
+
+    // Hide menu when on windows/linux
+    if (process.platform !== 'darwin') {
+        mainWindow.setMenu(null)
+    }
 
 	// Don't show the app window until it is ready and loaded
 	mainWindow.once('ready-to-show', () => {
