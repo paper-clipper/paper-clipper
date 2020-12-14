@@ -43,7 +43,9 @@ module.exports = {
     },
     target: 'electron-renderer',
     plugins: [
-        new HtmlWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'Paper Clipper',
+        }),
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
