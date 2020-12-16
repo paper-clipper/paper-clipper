@@ -10,7 +10,10 @@ export default ({
     name,
     placeholder,
     items = [],
+    error,
+    helperText,
     onChange = () => null,
+    onBlur = () => null,
 }) => {
 
     const [inputValue, setInputValue] = useState('')
@@ -117,14 +120,15 @@ export default ({
                     </Tag>
                 ))}
             </Field.Inside>
-            <Field.Group modifiers="append">
+            <Field.Group modifiers={['append', error && 'error' ]}>
                 <Field.Input
                     name={name}
                     id={name}
                     placeholder={placeholder}
                     style={{ paddingLeft: `${widthValue + 24}px` }}
-                    {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
                     modifiers="append"
+                    onBlur={onBlur}
+                    {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
                 />
                 <Field.Group modifiers="beside">
                     <Button.Text
@@ -140,6 +144,11 @@ export default ({
                     </Button.Text>
                 </Field.Group>
             </Field.Group>
+            {(error || helperText) && (
+                <Field.Message modifiers={[ error && 'error' ]}>
+                    {error || helperText}
+                </Field.Message>
+            )}
             <Select {...getMenuProps()}>
                 {isOpen && (
                     <Select.List>

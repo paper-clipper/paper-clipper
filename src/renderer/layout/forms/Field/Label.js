@@ -5,6 +5,7 @@ import {
     colorSecondary,
     fontSecondary,
     colorPrimary,
+    colorError,
     borderRadius,
 } from '@paper/layout/mixins'
 
@@ -26,6 +27,11 @@ const LABEL_MODIFIERS = {
         outline: none;
         border-radius: ${borderRadius(theme)};
         /* pointer-events: none; */
+    `,
+
+    'error': theme => css`
+        border-color: ${colorError(theme)};
+        color: ${colorError(theme)}
     `,
 
     'align-center': () => css`

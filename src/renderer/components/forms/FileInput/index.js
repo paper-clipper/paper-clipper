@@ -5,6 +5,8 @@ import { Text, Anchor } from '@paper/layout/elements'
 
 export default ({
     name,
+    error,
+    helperText,
     onChange = () => null,
 }) => {
 
@@ -41,7 +43,7 @@ export default ({
         <Field>
             <Field.Label
                 htmlFor={name}
-                modifiers={[ 'input', 'border-dashed', 'align-center' ]}
+                modifiers={[ 'input', 'border-dashed', 'align-center', error && 'error' ]}
                 // onDragEnter={() => setIsActive(true)}
                 // onDragLeave={() => setIsActive(false)}
                 onDragOver={e => e.preventDefault()}
@@ -57,6 +59,11 @@ export default ({
                 />
                 <Text modifiers={[ 'secondary', 'semibold' ]}>Drop files here to add or <Anchor>browse file</Anchor></Text>
             </Field.Label>
+            {(error || helperText) && (
+                <Field.Message modifiers={[ error && 'error' ]}>
+                    {error || helperText}
+                </Field.Message>
+            )}
         </Field>
     )
 }

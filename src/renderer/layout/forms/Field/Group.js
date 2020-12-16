@@ -51,6 +51,10 @@ const GROUP_MODIFIERS = {
 
     'error': theme => css`
         border: 1px solid ${colorError(theme)};
+
+        & ${Input} {
+            color: ${colorError(theme)};
+        }
     `,
 
 }

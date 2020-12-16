@@ -19,12 +19,35 @@ export default ({
 }) => {
 
     const dispatch = useDispatch()
+
+    const validate = values => {
+        const { name, tags, files } = values
+        const errors = {}
+
+        if (!name) {
+            errors.name = 'Required'
+        } else if (name.length < 3) {
+            errors.name = 'Name must be at least 3 characters long'
+        }
+
+        if (tags.length === 0) {
+            errors.tags = 'Required'
+        }
+
+        if (files.length === 0) {
+            errors.files = 'Required'
+        }
+
+        return errors
+    }
+
     const formik = useFormik({
         initialValues: {
             name: '',
             tags: [],
             files: [],
         },
+        validate,
         onSubmit: values => {
             dispatch(createClip(values))
                 .then(() => onClose())
@@ -72,17 +95,23 @@ export default ({
                                 name="name"
                                 placeholder="File name"
                                 onChange={formik.handleChange}
-                                value={formik.values.firstName}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.name}
+                                error={formik.touched.name && formik.errors.name}
                             />
                             <MultiSelectInput
                                 name="tags"
                                 placeholder="Tags"
                                 onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
                                 value={formik.values.tags}
+                                error={formik.touched.tags && formik.errors.tags}
                             />
                             <FileInput
                                 name="files"
                                 onChange={handleOnFileChange}
+                                value={formik.values.files}
+                                error={formik.touched.files && formik.errors.files}
                             />
                         </Form>
                         {(formik.values.files || []).map((item, index) => (
