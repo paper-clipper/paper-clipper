@@ -2,7 +2,7 @@ import {
     OPEN_FILES_REQUEST,
     OPEN_FILES_SUCCESS,
     OPEN_FILES_FAILURE,
-} from '@paper/actions/FILESs'
+} from '@paper/actions/files'
 
 const initialState = {
     loading: false,
