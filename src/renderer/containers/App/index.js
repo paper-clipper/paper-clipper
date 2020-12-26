@@ -1,12 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { App } from '../../layout/containers'
-import { Header } from '../../layout/components'
+import { App } from '@paper/layout/containers'
 
-import Sidebar from '../../components/Sidebar'
-import Card from '../../components/Card'
+import Header from '@paper/components/Header'
+import Sidebar from '@paper/components/Sidebar'
+import FileCard from '@paper/components/files/FileCard'
+
+import { fetchClips } from '@paper/actions'
 
 export default () => {
+
+    const { loading, error, data } = useSelector(state => state.clips)
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(fetchClips())
+    }, [])
+
     return (
         <App>
             <App.Header>
@@ -16,9 +27,8 @@ export default () => {
                 <Sidebar />
             </App.Sidebar>
             <App.Content>
-                {new Array(20).fill(0)
-                    .map((_, i) => (
-                        <Card key={i} />
+                {(data || []).map((clip, i) => (
+                        <FileCard key={i} {...clip} />
                     ))}
             </App.Content>
         </App>
