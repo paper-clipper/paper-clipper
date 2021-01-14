@@ -5,7 +5,7 @@ import { App } from '@paper/layout/containers'
 
 import Header from '@paper/components/Header'
 import Sidebar from '@paper/components/Sidebar'
-import FileCard from '@paper/components/files/FileCard'
+import FileCard from '@paper/components/core/FileCard'
 
 import { fetchClips } from '@paper/actions'
 
@@ -28,8 +28,8 @@ export default () => {
             </App.Sidebar>
             <App.Content>
                 {(data || []).map((clip, i) => (
-                        <FileCard key={i} {...clip} />
-                    ))}
+                    <FileCard key={i} {...clip} />
+                ))}
             </App.Content>
         </App>
     )
