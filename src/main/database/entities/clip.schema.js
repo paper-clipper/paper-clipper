@@ -1,10 +1,10 @@
 const { EntitySchema } = require('typeorm')
-const PaperClip = require('../models/paper-clip.model')
+const Clip = require('../models/clip.model')
 
 module.exports = new EntitySchema({
-    name: 'PaperClip',
-    tableName: 'paper_clips',
-    target: PaperClip,
+    name: 'Clip',
+    tableName: 'clips',
+    target: Clip,
     columns: {
         id: {
             primary: true,

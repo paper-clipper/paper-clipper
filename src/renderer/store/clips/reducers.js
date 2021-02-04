@@ -8,6 +8,9 @@ import {
     CREATE_CLIP_REQUEST,
     CREATE_CLIP_SUCCESS,
     CREATE_CLIP_FAILURE,
+    DELETE_CLIP_REQUEST,
+    DELETE_CLIP_SUCCESS,
+    DELETE_CLIP_FAILURE,
 } from './actions'
 
 const initialState = {
@@ -45,6 +48,15 @@ export default (state = initialState, { type, payload }) => {
 
     case CREATE_CLIP_FAILURE:
         return { ...state, loading: false, error: payload }
+
+    case DELETE_CLIP_REQUEST:
+        return { ...state, loading: true, error: null }
+
+    case DELETE_CLIP_SUCCESS:
+        return { ...state, loading: false, data: state.data.filter(item => item.id !== payload.id) }
+
+    case DELETE_CLIP_FAILURE:
+        return { ...state, loading: false, error: payload}
 
     default:
         return state

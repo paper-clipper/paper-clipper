@@ -1,5 +1,5 @@
 
-class PaperClip {
+class Clip {
 
     constructor({ id, name, files, tags, createdAt, updatedAt } = {}) {
 
@@ -14,4 +14,4 @@ class PaperClip {
 
 }
 
-module.exports = PaperClip
+module.exports = Clip

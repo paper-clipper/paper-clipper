@@ -15,22 +15,11 @@ import Menu from '@paper/components/overlay/Menu'
 
 import { useOnClickOutside } from '@paper/hooks'
 
+import { deleteClip } from '@paper/store/clips/actions'
 import { openFiles } from '@paper/store/files/actions'
 
-const menuItems = [
-    {
-        name: 'Edit',
-        icon: faPen,
-        handler: () => null,
-    },
-    {
-        name: 'Delete',
-        icon: faTrash,
-        handler: () => null,
-    },
-]
-
 export default ({
+    id,
     name,
     files = [],
     createdAt,
@@ -41,6 +30,19 @@ export default ({
     const menuRef = useRef()
     const [ isMenuOpen, setIsMenuOpen ] = useState(false)
     useOnClickOutside(menuRef, () => setIsMenuOpen(false))
+
+    const menuItems = [
+        {
+            name: 'Edit',
+            icon: faPen,
+            handler: () => null,
+        },
+        {
+            name: 'Delete',
+            icon: faTrash,
+            handler: () => dispatch(deleteClip({ id })),
+        },
+    ]
 
     const handleOnClick = () => {
         dispatch(openFiles(files))

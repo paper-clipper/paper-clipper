@@ -80,3 +80,31 @@ export const createClip = clip =>
             .then(payload => dispatch(createClipSuccess(payload)))
             .catch(error => dispatch(createClipFailure(error)))
     }
+
+
+export const DELETE_CLIP_REQUEST = 'DELETE_CLIP_REQUEST'
+export const DELETE_CLIP_SUCCESS = 'DELETE_CLIP_SUCCESS'
+export const DELETE_CLIP_FAILURE = 'DELETE_CLIP_FAILURE'
+
+export const deleteClipRequest = (payload) => ({
+    type: DELETE_CLIP_REQUEST,
+    payload,
+})
+
+export const deleteClipSuccess = (payload) => ({
+    type: DELETE_CLIP_SUCCESS,
+    payload,
+})
+
+export const deleteClipFailure = (payload) => ({
+    type: DELETE_CLIP_FAILURE,
+    payload,
+})
+
+export const deleteClip = ({ id }) =>
+    dispatch => {
+        dispatch(deleteClipRequest())
+        return ipcRenderer.invoke('delete-clip', { id })
+            .then(() => dispatch(deleteClipSuccess({ id })))
+            .catch(error => dispatch(deleteClipFailure(error)))
+    }

@@ -6,7 +6,7 @@
 const { app, shell, ipcMain, BrowserWindow } = require('electron')
 const path = require('path')
 const url = require('url')
-const { connectToDatabase, getTagsService, getFilesService, getPaperClippersService } = require('./database')
+const { connectToDatabase, getTagsService, getFilesService, getClipsService } = require('./database')
 
 // Add React extension for development
 const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer')
@@ -123,7 +123,7 @@ ipcMain.handle('create-clip', async (event, clip) => {
 
     const tagsService = getTagsService()
     const filesService = getFilesService()
-    const paperClippersService = getPaperClippersService()
+    const clipsService = getClipsService()
 
     const tags = await Promise.all(
         clip.tags.map(tag => tagsService.create({ name: tag }))
@@ -133,7 +133,7 @@ ipcMain.handle('create-clip', async (event, clip) => {
         clip.files.map(file => filesService.create(file))
     )
 
-    return paperClippersService.create({
+    return clipsService.create({
         ...clip,
         tags,
         files,
@@ -141,14 +141,19 @@ ipcMain.handle('create-clip', async (event, clip) => {
 
 })
 
+ipcMain.handle('delete-clip', async (event, query) => {
+    const clipsService = getClipsService()
+    return clipsService.deleteOne(query)
+})
+
 ipcMain.handle('fetch-clips', (event, query) => {
-    const paperClippersService = getPaperClippersService()
-    return paperClippersService.find(query)
+    const clipsService = getClipsService()
+    return clipsService.find(query)
 })
 
 ipcMain.handle('fetch-clips-like', (event, query) => {
-    const paperClippersService = getPaperClippersService()
-    return paperClippersService.findLike(query)
+    const clipsService = getClipsService()
+    return clipsService.findLike(query)
 })
 
 ipcMain.handle('open-files', (event, files) => {

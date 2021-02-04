@@ -11,6 +11,9 @@ module.exports = {
     resolve: {
         alias: {
             '@paper': defaultInclude,
+            '@paper-ui/theme': path.join(__dirname, '../src/renderer/ui/theme'),
+            '@paper-ui/mixin': path.join(__dirname, '../src/renderer/ui/mixin'),
+            '@paper-ui': path.join(__dirname, '../src/renderer/ui'),
         },
     },
     module: {

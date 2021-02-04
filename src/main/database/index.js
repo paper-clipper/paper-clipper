@@ -1,7 +1,7 @@
 const path = require('path')
 const { createConnection, getConnection } = require('typeorm')
 const filesService = require('./services/files.service')
-const paperClippersService = require('./services/paper-clippers.service')
+const clipsService = require('./services/clips.service')
 const tagsService = require('./services/tags.service')
 
 module.exports = {
@@ -15,7 +15,7 @@ module.exports = {
             entities: [
                 require('./entities/tag.schema'),
                 require('./entities/file.schema'),
-                require('./entities/paper-clip.schema'),
+                require('./entities/clip.schema'),
             ],
             logging: true,
         }),
@@ -24,6 +24,6 @@ module.exports = {
 
     getFilesService: () => filesService(getConnection()),
 
-    getPaperClippersService: () => paperClippersService(getConnection()),
+    getClipsService: () => clipsService(getConnection()),
 
 }
