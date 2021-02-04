@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-import { Field } from '@paper/layout/forms'
-import { Text, Anchor } from '@paper/layout/elements'
+import { Field } from '@paper-ui/forms'
+import { Text } from '@paper-ui/typography'
 
 export default ({
     name,
@@ -57,7 +57,17 @@ export default ({
                     hidden={true}
                     onChange={handleOnChange}
                 />
-                <Text modifiers={[ 'secondary', 'semibold' ]}>Drop files here to add or <Anchor>browse file</Anchor></Text>
+                <Text
+                    modifiers={[ 'secondary', 'semi-bold', 'sm', 'neutral' ]}
+                >
+                    Drop files here to add or&nbsp;
+                    <Text
+                        as='a'
+                        modifiers={[ 'secondary', 'semi-bold', 'sm', 'underline', 'action' ]}
+                    >
+                        browse file
+                    </Text>
+                </Text>
             </Field.Label>
             {(error || helperText) && (
                 <Field.Message modifiers={[ error && 'error' ]}>

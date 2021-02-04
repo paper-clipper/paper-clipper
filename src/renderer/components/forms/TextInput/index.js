@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react'
 
-import { Field } from '@paper/layout/forms'
+import { Field } from '@paper-ui/forms'
 
 export default forwardRef(({
     name,

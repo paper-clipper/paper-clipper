@@ -1,0 +1,15 @@
+export default {
+    full: '100%',
+    '3xs': '8rem',
+    '2xs': '10rem',
+    xs: '12rem',
+    sm: '14rem',
+    md: '16rem',
+    lg: '22rem',
+    xl: '28rem',
+    '2xl': '36rem',
+    '3xl': '42rem',
+    '4xl': '48rem',
+    '5xl': '56rem',
+    '6xl': '72rem',
+}

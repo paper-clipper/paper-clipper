@@ -1,37 +1,39 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { App } from '@paper/layout/containers'
+import { View } from '@paper-ui/view'
+import { Margin } from '@paper-ui/layout'
 
-import Header from '@paper/components/Header'
-import Sidebar from '@paper/components/Sidebar'
-import FileCard from '@paper/components/core/FileCard'
+import { Header } from '@paper/components/layout'
+import { ClipCard, AddClip } from '@paper/components/clip'
 
-import { fetchClips } from '@paper/actions'
+import { fetchClips } from '@paper/store/clips/actions'
 
 export default () => {
 
-    const { loading, error, data } = useSelector(state => state.clips)
     const dispatch = useDispatch()
+    const { data } = useSelector(state => state.clips)
+
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
         dispatch(fetchClips())
     }, [])
 
     return (
-        <App>
-            <App.Header>
+        <View>
+            <View.Header>
                 <Header />
-            </App.Header>
-            <App.Sidebar>
-                <Sidebar />
-            </App.Sidebar>
-            <App.Content>
+            </View.Header>
+            <View.Content>
                 {(data || []).map((clip, i) => (
-                    <FileCard key={i} {...clip} />
+                    <Margin key={i} all="3">
+                        <ClipCard {...clip} />
+                    </Margin>
                 ))}
-            </App.Content>
-        </App>
+            </View.Content>
+            {isModalOpen && <AddClip onClose={() => setIsModalOpen(false)} />}
+        </View>
     )
 }
 

@@ -1,0 +1,42 @@
+export default {
+    fonts: {
+        primary: 'Lato, sans-serif',
+        secondary: '\'Open Sans\', sans-serif',
+    },
+    fontSizes: {
+        xs: '0.675rem',
+        sm: '0.75rem',
+        md: '0.875rem',
+        lg: '1rem',
+        xl: '1.125rem',
+        '2xl': '1.25rem',
+        '3xl': '1.5rem',
+        '4xl': '1.825rem',
+        '5xl': '2.5rem',
+        '6xl': '3.25rem',
+    },
+    fontWeights: {
+        thin: 300,
+        normal: 400,
+        medium: 500,
+        'semi-bold': 600,
+        bold: 700,
+    },
+    lineHeights: {
+        normal: 'normal',
+        none: '1',
+        shorter: '1.25',
+        short: '1.375',
+        base: '1.5',
+        tall: '1.625',
+        taller: '2',
+    },
+    letterSpacings: {
+        tighter: '-0.05em',
+        tight: '-0.025em',
+        normal: '0',
+        wide: '0.025em',
+        wider: '0.05em',
+        widest: '0.1em',
+    },
+}

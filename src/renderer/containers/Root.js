@@ -3,7 +3,7 @@ import { ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux'
 
 import store from '@paper/store'
-import theme from '@paper/layout/theme'
+import theme from '@paper-ui/theme'
 
 import App from './App'
 

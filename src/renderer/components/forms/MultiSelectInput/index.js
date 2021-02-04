@@ -3,8 +3,10 @@ import { useCombobox, useMultipleSelection } from 'downshift'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronUp, faChevronDown, faTimes } from '@fortawesome/free-solid-svg-icons'
 
-import { Field, Select } from '@paper/layout/forms'
-import { Tag, Button } from '@paper/layout/elements'
+import { Field, Select } from '@paper-ui/forms'
+import { Tag } from '@paper-ui/misc'
+import { Icon } from '@paper-ui/typography'
+import { Button } from '@paper-ui/button'
 
 export default ({
     name,
@@ -109,7 +111,9 @@ export default ({
                         {...getSelectedItemProps({ selectedItem, index })}
                     >
                         {selectedItem}
-                        <FontAwesomeIcon
+                        <Icon
+                            as={FontAwesomeIcon}
+                            modifiers={[ 'action', 'xs' ]}
                             icon={faTimes}
                             fixedWidth
                             onClick={e => {
@@ -131,17 +135,20 @@ export default ({
                     {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
                 />
                 <Field.Group modifiers="beside">
-                    <Button.Text
-                        modifiers="icon"
-                        aria-label={'toggle menu'}
-                        {...getToggleButtonProps()}
-                        onClick={handleToggleButton}
-                    >
-                        <FontAwesomeIcon
+                    {getFilteredItems(items).length > 0 && (
+                        <Button.Icon
+                            modifiers={[ 'neutral' ]}
+                            aria-label={'toggle menu'}
+                            {...getToggleButtonProps()}
+                            onClick={handleToggleButton}
+                        >
+                        <Icon
+                            as={FontAwesomeIcon}
                             icon={!isOpen ? faChevronDown : faChevronUp}
                             fixedWidth
                         />
-                    </Button.Text>
+                        </Button.Icon>
+                    )}
                 </Field.Group>
             </Field.Group>
             {(error || helperText) && (
@@ -150,7 +157,7 @@ export default ({
                 </Field.Message>
             )}
             <Select {...getMenuProps()}>
-                {isOpen && (
+                {(isOpen && inputValue) && (
                     <Select.List>
                         {getFilteredItems(items).map((item, index) => (
                             <Select.Item
