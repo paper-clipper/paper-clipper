@@ -108,3 +108,16 @@ export const deleteClip = ({ id }) =>
             .then(() => dispatch(deleteClipSuccess({ id })))
             .catch(error => dispatch(deleteClipFailure(error)))
     }
+
+export const OPEN_ADD_CLIP_MODAL = 'OPEN_ADD_CLIP_MODAL'
+export const CLOSE_ADD_CLIP_MODAL = 'CLOSE_ADD_CLIP_MODAL'
+
+export const openAddClipModal = (payload) => ({
+    type: OPEN_ADD_CLIP_MODAL,
+    payload,
+})
+
+export const closeAddClipModal = (payload) => ({
+    type: CLOSE_ADD_CLIP_MODAL,
+    payload,
+})

@@ -9,6 +9,7 @@ import { Upload } from '@paper/components/file'
 import { TextInput, MultiSelectInput, FileInput } from '@paper/components/forms'
 
 export default ({
+    initialValues,
     submitForm,
     onSubmit = () => null,
 }) => {
@@ -35,9 +36,9 @@ export default ({
 
     const formik = useFormik({
         initialValues: {
-            name: '',
-            tags: [],
-            files: [],
+            name: initialValues.name || '',
+            tags: initialValues.tags || [],
+            files: initialValues.files || [],
         },
         validate,
         onSubmit,

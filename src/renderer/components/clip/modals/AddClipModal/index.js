@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
@@ -16,7 +16,8 @@ export default ({
 }) => {
 
     const dispatch = useDispatch()
-    const [submitForm, setSubmitForm] = useState(false)
+    const { addClipModal } = useSelector(state => state.clips)
+    const [ submitForm, setSubmitForm ] = useState(false)
 
     const handleOnSubmit = (values) => {
         dispatch(createClip(values))
@@ -25,14 +26,12 @@ export default ({
 
     const handleOnAdd = () => setSubmitForm(true)
 
-    const handleOnCancel = onClose
-
     return (
         <Modal>
             <Modal.Header>
                 <Modal.Actions>
                     <Button.Icon
-                        onClick={() => null}
+                        onClick={onClose}
                         modifiers={[ 'md', 'neutral' ]}
                     >
                         <Icon
@@ -47,6 +46,7 @@ export default ({
             </Modal.Header>
             <Modal.Content>
                 <Form
+                    initialValues={addClipModal.initialValues}
                     submitForm={submitForm}
                     onSubmit={handleOnSubmit}
                 />
@@ -54,7 +54,7 @@ export default ({
             <Modal.Footer>
                 <Button.Text
                     modifiers="secondary"
-                    onClick={handleOnCancel}
+                    onClick={onClose}
                 >
                     Cancel
                 </Button.Text>
