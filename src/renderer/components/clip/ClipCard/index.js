@@ -15,7 +15,7 @@ import Menu from '@paper/components/overlay/Menu'
 
 import { useOnClickOutside } from '@paper/hooks'
 
-import { deleteClip } from '@paper/store/clips/actions'
+import { openDeleteClipPopup } from '@paper/store/clips/actions'
 import { openFiles } from '@paper/store/files/actions'
 
 export default ({
@@ -40,7 +40,7 @@ export default ({
         {
             name: 'Delete',
             icon: faTrash,
-            handler: () => dispatch(deleteClip({ id })),
+            handler: () => dispatch(openDeleteClipPopup({ id })),
         },
     ]
 

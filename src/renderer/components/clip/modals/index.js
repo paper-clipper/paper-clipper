@@ -1,7 +1,7 @@
 import AddClipModal from './AddClipModal'
-import EditClip from './EditClip'
+import EditClipModal from './EditClipModal'
 
 export {
     AddClipModal,
-    EditClip,
+    EditClipModal,
 }

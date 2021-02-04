@@ -1,5 +1,5 @@
-import RemoveClip from './RemoveClip'
+import DeleteClipPopup from './DeleteClipPopup'
 
 export {
-    RemoveClip,
+    DeleteClipPopup,
 }

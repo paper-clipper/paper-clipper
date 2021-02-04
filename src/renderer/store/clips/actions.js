@@ -121,3 +121,16 @@ export const closeAddClipModal = (payload) => ({
     type: CLOSE_ADD_CLIP_MODAL,
     payload,
 })
+
+export const OPEN_DELETE_CLIP_POPUP = 'OPEN_DELETE_CLIP_POPUP'
+export const CLOSE_DELETE_CLIP_POPUP = 'CLOSE_DELETE_CLIP_POPUP'
+
+export const openDeleteClipPopup = (payload) => ({
+    type: OPEN_DELETE_CLIP_POPUP,
+    payload,
+})
+
+export const closeDeleteClipPopup = (payload) => ({
+    type: CLOSE_DELETE_CLIP_POPUP,
+    payload,
+})

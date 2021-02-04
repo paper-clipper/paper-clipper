@@ -13,6 +13,8 @@ import {
     DELETE_CLIP_FAILURE,
     OPEN_ADD_CLIP_MODAL,
     CLOSE_ADD_CLIP_MODAL,
+    OPEN_DELETE_CLIP_POPUP,
+    CLOSE_DELETE_CLIP_POPUP,
 } from './actions'
 
 const addClipModalInitialState = {
@@ -20,11 +22,17 @@ const addClipModalInitialState = {
     initialValues: {},
 }
 
+const deleteClipPopup = {
+    isOpen: false,
+    clip: {},
+}
+
 const initialState = {
     loading: false,
     error: null,
     data: [],
     addClipModal: addClipModalInitialState,
+    deleteClipPopup: deleteClipPopup,
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -71,6 +79,12 @@ export default (state = initialState, { type, payload }) => {
 
         case CLOSE_ADD_CLIP_MODAL:
             return { ...state, addClipModal: addClipModalInitialState }
+
+        case OPEN_DELETE_CLIP_POPUP:
+            return { ...state, deleteClipPopup: { isOpen: true, clip: payload } }
+
+        case CLOSE_DELETE_CLIP_POPUP:
+            return { ...state, deleteClipPopup: { isOpen: false, clip: {} } }
 
         default:
             return state
