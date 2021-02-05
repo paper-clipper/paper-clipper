@@ -15,6 +15,11 @@ import {
     CLOSE_ADD_CLIP_MODAL,
     OPEN_DELETE_CLIP_POPUP,
     CLOSE_DELETE_CLIP_POPUP,
+    OPEN_EDIT_CLIP_MODAL,
+    CLOSE_EDIT_CLIP_MODAL,
+    UPDATE_CLIP_REQUEST,
+    UPDATE_CLIP_SUCCESS,
+    UPDATE_CLIP_FAILURE,
 } from './actions'
 
 const addClipModalInitialState = {
@@ -22,7 +27,12 @@ const addClipModalInitialState = {
     initialValues: {},
 }
 
-const deleteClipPopup = {
+const editClipModalInitialState = {
+    isOpen: false,
+    clip: {},
+}
+
+const deleteClipPopupInitialState = {
     isOpen: false,
     clip: {},
 }
@@ -32,7 +42,8 @@ const initialState = {
     error: null,
     data: [],
     addClipModal: addClipModalInitialState,
-    deleteClipPopup: deleteClipPopup,
+    editClipModal: editClipModalInitialState,
+    deleteClipPopup: deleteClipPopupInitialState,
 }
 
 export default (state = initialState, { type, payload }) => {
@@ -60,7 +71,16 @@ export default (state = initialState, { type, payload }) => {
             return { ...state, loading: true, error: null }
 
         case CREATE_CLIP_SUCCESS:
-            return { ...state, loading: false, data: [...state.data, payload] }
+            return { ...state, loading: false, data: [...state.data, payload ] }
+
+        case UPDATE_CLIP_REQUEST:
+            return { ...state, loading: true, error: null }
+
+        case UPDATE_CLIP_SUCCESS:
+            return { ...state, loading: false, data: state.data.map(item => item.id !== payload.id ? item : payload) }
+
+        case UPDATE_CLIP_FAILURE:
+            return { ...state, loading: false, error: payload }
 
         case CREATE_CLIP_FAILURE:
             return { ...state, loading: false, error: payload }
@@ -80,11 +100,17 @@ export default (state = initialState, { type, payload }) => {
         case CLOSE_ADD_CLIP_MODAL:
             return { ...state, addClipModal: addClipModalInitialState }
 
+        case OPEN_EDIT_CLIP_MODAL:
+            return { ...state, editClipModal: { isOpen: true, clip: payload } }
+
+        case CLOSE_EDIT_CLIP_MODAL:
+            return { ...state, editClipModal: editClipModalInitialState }
+
         case OPEN_DELETE_CLIP_POPUP:
             return { ...state, deleteClipPopup: { isOpen: true, clip: payload } }
 
         case CLOSE_DELETE_CLIP_POPUP:
-            return { ...state, deleteClipPopup: { isOpen: false, clip: {} } }
+            return { ...state, deleteClipPopup: deleteClipPopupInitialState }
 
         default:
             return state

@@ -12,6 +12,10 @@ module.exports = connection => ({
         )
     },
 
+    updateOne(clip) {
+        return this.clipsRepository.save(clip)
+    },
+
     deleteOne(query) {
         return this.clipsRepository.delete(query)
     },

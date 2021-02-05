@@ -81,6 +81,32 @@ export const createClip = clip =>
             .catch(error => dispatch(createClipFailure(error)))
     }
 
+export const UPDATE_CLIP_REQUEST = 'UPDATE_CLIP_REQUEST'
+export const UPDATE_CLIP_SUCCESS = 'UPDATE_CLIP_SUCCESS'
+export const UPDATE_CLIP_FAILURE = 'UPDATE_CLIP_FAILURE'
+
+export const updateClipRequest = (payload) => ({
+    type: UPDATE_CLIP_REQUEST,
+    payload,
+})
+
+export const updateClipSuccess = (payload) => ({
+    type: UPDATE_CLIP_SUCCESS,
+    payload,
+})
+
+export const updateClipFailure = (payload) => ({
+    type: UPDATE_CLIP_FAILURE,
+    payload,
+})
+
+export const updateClip = (clip) =>
+    dispatch => {
+        dispatch(updateClipRequest())
+        return ipcRenderer.invoke('update-clip', clip)
+            .then(payload => dispatch(updateClipSuccess(payload)))
+            .catch(error => dispatch(updateClipFailure(error)))
+    }
 
 export const DELETE_CLIP_REQUEST = 'DELETE_CLIP_REQUEST'
 export const DELETE_CLIP_SUCCESS = 'DELETE_CLIP_SUCCESS'
@@ -119,6 +145,19 @@ export const openAddClipModal = (payload) => ({
 
 export const closeAddClipModal = (payload) => ({
     type: CLOSE_ADD_CLIP_MODAL,
+    payload,
+})
+
+export const OPEN_EDIT_CLIP_MODAL = 'OPEN_EDIT_CLIP_MODAL'
+export const CLOSE_EDIT_CLIP_MODAL = 'CLOSE_EDIT_CLIP_MODAL'
+
+export const openEditClipModal = (payload) => ({
+    type: OPEN_EDIT_CLIP_MODAL,
+    payload,
+})
+
+export const closeEditClipModal = (payload) => ({
+    type: CLOSE_EDIT_CLIP_MODAL,
     payload,
 })
 

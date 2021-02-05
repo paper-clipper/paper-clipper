@@ -124,9 +124,10 @@ ipcMain.handle('create-clip', async (event, clip) => {
     const tagsService = getTagsService()
     const filesService = getFilesService()
     const clipsService = getClipsService()
+    console.log(clip)
 
     const tags = await Promise.all(
-        clip.tags.map(tag => tagsService.create({ name: tag }))
+        clip.tags.map(tag => tagsService.create(tag))
     )
 
     const files = await Promise.all(
@@ -141,9 +142,14 @@ ipcMain.handle('create-clip', async (event, clip) => {
 
 })
 
-ipcMain.handle('delete-clip', async (event, query) => {
+ipcMain.handle('update-clip', (event, clip) => {
     const clipsService = getClipsService()
-    return clipsService.deleteOne(query)
+    return clipsService.updateOne(clip)
+})
+
+ipcMain.handle('delete-clip', (event, clip) => {
+    const clipsService = getClipsService()
+    return clipsService.deleteOne(clip)
 })
 
 ipcMain.handle('fetch-clips', (event, query) => {

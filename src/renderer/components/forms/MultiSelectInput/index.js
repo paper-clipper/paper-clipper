@@ -11,6 +11,7 @@ import { Button } from '@paper-ui/button'
 export default ({
     name,
     placeholder,
+    value = [],
     items = [],
     error,
     helperText,
@@ -26,17 +27,22 @@ export default ({
         selectedItems,
         getSelectedItemProps,
         removeSelectedItem,
-    } = useMultipleSelection({ initialSelectedItems: [] })
+    } = useMultipleSelection({ initialSelectedItems: value })
     const ref = useRef(null)
 
     useEffect(() => {
         const width = ref.current.offsetWidth
         setWidthValue(width)
+    }, [])
+
+    useEffect(() => {
+        const width = ref.current.offsetWidth
+        setWidthValue(width)
         onChange({ target: { name, value: selectedItems }})
-    }, [ selectedItems ])
+    }, [ selectedItems, ref.current ])
 
     const getFilteredItems = () =>
-        items.filter(
+        items.concat(selectedItems).filter(
             item =>
                 selectedItems.indexOf(item) < 0 &&
                 item.toLowerCase().startsWith(inputValue.toLowerCase())

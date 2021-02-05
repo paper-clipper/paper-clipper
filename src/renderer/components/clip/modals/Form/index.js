@@ -50,8 +50,22 @@ export default ({
         }
     }, [ submitForm ])
 
-    const handleOnFileChange = e => {
-        const { name, value } = e.target
+    const handleOnTagChange = event => {
+        const { name, value } = event.target
+        const { tags } = formik.values
+        formik.handleChange({
+            target: {
+                name,
+                value: value.map(item => ({
+                    name: item,
+                    ...(tags.find(tag => tag.name === item) || {}),
+                })),
+            },
+        })
+    }
+
+    const handleOnFileChange = event => {
+        const { name, value } = event.target
         const { files } = formik.values
         formik.handleChange({
             target: {
@@ -88,9 +102,9 @@ export default ({
                     <MultiSelectInput
                         name="tags"
                         placeholder="Tags"
-                        onChange={formik.handleChange}
+                        onChange={handleOnTagChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.tags}
+                        value={formik.values.tags.map(tag => tag.name)}
                         error={formik.touched.tags && formik.errors.tags}
                     />
                 </Margin>

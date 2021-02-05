@@ -8,6 +8,7 @@ import { Header } from '@paper/components/layout'
 import {
     ClipCard,
     AddClipModal,
+    EditClipModal,
     DeleteClipPopup,
 } from '@paper/components/clip'
 import {
@@ -15,6 +16,7 @@ import {
     deleteClip,
     openAddClipModal,
     closeAddClipModal,
+    closeEditClipModal,
     closeDeleteClipPopup,
 } from '@paper/store/clips/actions'
 
@@ -24,6 +26,7 @@ export default () => {
     const {
         data,
         addClipModal,
+        editClipModal,
         deleteClipPopup,
     } = useSelector(state => state.clips)
 
@@ -62,6 +65,11 @@ export default () => {
             {addClipModal.isOpen && (
                 <AddClipModal
                     onClose={() => dispatch(closeAddClipModal())}
+                />
+            )}
+            {editClipModal.isOpen && (
+                <EditClipModal
+                    onClose={() => dispatch(closeEditClipModal())}
                 />
             )}
             {deleteClipPopup.isOpen && (

@@ -11,31 +11,36 @@ import { Margin } from '@paper-ui/layout'
 import { Icon } from '@paper-ui/typography'
 
 import ClipIcon from '../ClipIcon'
-import Menu from '@paper/components/overlay/Menu'
+import { Menu } from '@paper/components/overlay'
 
 import { useOnClickOutside } from '@paper/hooks'
 
-import { openDeleteClipPopup } from '@paper/store/clips/actions'
+import { openEditClipModal, openDeleteClipPopup } from '@paper/store/clips/actions'
 import { openFiles } from '@paper/store/files/actions'
 
 export default ({
     id,
     name,
     files = [],
-    createdAt,
     tags = [],
+    createdAt,
 }) => {
 
     const dispatch = useDispatch()
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
     const menuRef = useRef()
-    const [ isMenuOpen, setIsMenuOpen ] = useState(false)
     useOnClickOutside(menuRef, () => setIsMenuOpen(false))
 
     const menuItems = [
         {
             name: 'Edit',
             icon: faPen,
-            handler: () => null,
+            handler: () => dispatch(openEditClipModal({
+                id,
+                name,
+                files,
+                tags,
+            })),
         },
         {
             name: 'Delete',
@@ -46,7 +51,6 @@ export default ({
 
     const handleOnClick = () => {
         dispatch(openFiles(files))
-            .then(console.log)
     }
 
     return (
@@ -54,7 +58,7 @@ export default ({
             <ClipCard.Actions>
                 <Button.Icon
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    modifiers={[ 'md', 'neutral' ]}
+                    modifiers={['md', 'neutral']}
                 >
                     <Icon
                         as={FontAwesomeIcon}
