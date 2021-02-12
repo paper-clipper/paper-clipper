@@ -53,6 +53,9 @@ export default ({
         dispatch(openFiles(files))
     }
 
+    const truncate = (text, length = 22) =>
+        text.length > length ? `${text.substring(0, length)}...` : text
+
     return (
         <ClipCard>
             <ClipCard.Actions>
@@ -78,7 +81,7 @@ export default ({
                     showExtension={true}
                 />
             </ClipCard.Media>
-            <ClipCard.Title>{name}</ClipCard.Title>
+            <ClipCard.Title>{truncate(name)}</ClipCard.Title>
             <ClipCard.Subtitle>Added: {moment(createdAt).format('DD-MM-YYYY')}</ClipCard.Subtitle>
             <ClipCard.Tags>
                 {tags.map(tag => (
