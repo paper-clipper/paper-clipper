@@ -1,18 +1,24 @@
 import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik'
 
 import { Form } from '@paper-ui/forms'
 import { Margin } from '@paper-ui/layout'
 
-
 import { Upload } from '@paper/components/file'
 import { TextInput, MultiSelectInput, FileInput } from '@paper/components/forms'
+
+import { fetchTagsLike } from '@paper/store/tags/actions'
 
 export default ({
     initialValues,
     submitForm,
     onSubmit = () => null,
 }) => {
+
+    const dispatch = useDispatch()
+    const { tags } = useSelector(state => state)
+
     const validate = values => {
         const { name, tags, files } = values
         const errors = {}
@@ -64,6 +70,16 @@ export default ({
         })
     }
 
+    const handleFilterTags = (inputValue) => {
+        dispatch(fetchTagsLike({ name: inputValue }))
+    }
+
+    const handleGetFilteredTags = (selectedItems = []) => {
+        return tags.data
+            .map(tag => tag.name)
+            .filter(tag => !selectedItems.includes(tag))
+    }
+
     const handleOnFileChange = event => {
         const { name, value } = event.target
         const { files } = formik.values
@@ -104,6 +120,8 @@ export default ({
                         placeholder="Tags"
                         onChange={handleOnTagChange}
                         onBlur={formik.handleBlur}
+                        filterItems={handleFilterTags}
+                        getFilteredItems={handleGetFilteredTags}
                         value={formik.values.tags.map(tag => tag.name)}
                         error={formik.touched.tags && formik.errors.tags}
                     />

@@ -1,3 +1,4 @@
+const { Like } = require('typeorm')
 const TagSchema = require('../entities/tag.schema')
 const Tag = require('../models/tag.model')
 
@@ -5,14 +6,23 @@ module.exports = connection => ({
 
     tagsRepository: connection.getRepository(TagSchema),
 
-    async create(tag) {
+    create(tag) {
         return this.tagsRepository.save(
             this.tagsRepository.create(new Tag(tag))
         )
     },
 
-    async findOne(query) {
+    findOne(query) {
         return this.tagsRepository.findOne(query)
+    },
+
+    findLike({ limit = 5, ...query } = {}) {
+        return this.tagsRepository.find({
+            where: {
+                name: Like(`%${query.name || ''}%`),
+            },
+            take: limit,
+        })
     },
 
 })

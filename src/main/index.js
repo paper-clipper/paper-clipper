@@ -162,6 +162,11 @@ ipcMain.handle('fetch-clips-like', (event, query) => {
     return clipsService.findLike(query)
 })
 
+ipcMain.handle('fetch-tags-like', (event, query) => {
+    const tagsService = getTagsService()
+    return tagsService.findLike(query)
+})
+
 ipcMain.handle('open-files', (event, files) => {
     return Promise.all(files.map(file => shell.openPath(file.path)))
 })

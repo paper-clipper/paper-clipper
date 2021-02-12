@@ -12,11 +12,12 @@ export default ({
     name,
     placeholder,
     value = [],
-    items = [],
     error,
     helperText,
     onChange = () => null,
     onBlur = () => null,
+    filterItems = () => null,
+    getFilteredItems = () => null,
 }) => {
 
     const [inputValue, setInputValue] = useState('')
@@ -28,25 +29,21 @@ export default ({
         getSelectedItemProps,
         removeSelectedItem,
     } = useMultipleSelection({ initialSelectedItems: value })
-    const ref = useRef(null)
+    const inputRef = useRef(null)
 
     useEffect(() => {
-        const width = ref.current.offsetWidth
-        setWidthValue(width)
+        filterItems(inputValue, selectedItems)
     }, [])
 
     useEffect(() => {
-        const width = ref.current.offsetWidth
+        const width = inputRef.current.offsetWidth
         setWidthValue(width)
         onChange({ target: { name, value: selectedItems }})
-    }, [ selectedItems, ref.current ])
+    }, [ selectedItems, inputRef.current ])
 
-    const getFilteredItems = () =>
-        items.concat(selectedItems).filter(
-            item =>
-                selectedItems.indexOf(item) < 0 &&
-                item.toLowerCase().startsWith(inputValue.toLowerCase())
-        )
+    useEffect(() => {
+        filterItems(inputValue, selectedItems)
+    }, [inputValue])
 
     const stateReducer = (state, actionAndChanges) => {
         const { changes, type } = actionAndChanges
@@ -55,7 +52,7 @@ export default ({
             case useCombobox.stateChangeTypes.ItemClick:
                 return {
                     ...changes,
-                    isOpen: true, // keep the menu open after selection.
+                    isOpen: false, // keep the menu open after selection.
                 }
         }
         return changes
@@ -65,6 +62,7 @@ export default ({
         if (selectedItem) {
             setInputValue('')
             addSelectedItem(selectedItem)
+            closeMenu()
         }
     }
 
@@ -96,7 +94,7 @@ export default ({
         inputValue,
         defaultHighlightedIndex: 0, // after selection, highlight the first item.
         selectedItem: null,
-        items: getFilteredItems(),
+        items: getFilteredItems(selectedItems),
         stateReducer,
         onStateChange,
     })
@@ -110,7 +108,7 @@ export default ({
 
     return (
         <Field {...getComboboxProps()}>
-            <Field.Inside ref={ref}>
+            <Field.Inside ref={inputRef}>
                 {selectedItems.map((selectedItem, index) => (
                     <Tag
                         key={`selected-item-${index}`}
@@ -141,7 +139,7 @@ export default ({
                     {...getInputProps(getDropdownProps({ preventKeyAction: isOpen }))}
                 />
                 <Field.Group modifiers="beside">
-                    {getFilteredItems(items).length > 0 && (
+                    {getFilteredItems(selectedItems).length > 0 && (
                         <Button.Icon
                             modifiers={[ 'neutral' ]}
                             aria-label={'toggle menu'}
@@ -163,9 +161,9 @@ export default ({
                 </Field.Message>
             )}
             <Select {...getMenuProps()}>
-                {(isOpen && inputValue) && (
+                {(isOpen || inputValue) && (
                     <Select.List>
-                        {getFilteredItems(items).map((item, index) => (
+                        {getFilteredItems(selectedItems).map((item, index) => (
                             <Select.Item
                                 key={`${item}${index}`}
                                 {...getItemProps({ item, index })}
@@ -173,7 +171,7 @@ export default ({
                                 {item}
                             </Select.Item>
                         ))}
-                        {inputValue && (
+                        {(getFilteredItems(selectedItems).length === 0 && inputValue) && (
                             <Select.Item
                                 onClick={() => addItem(inputValue)}
                             >
