@@ -2,6 +2,7 @@ import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import { Provider } from 'react-redux'
 
+import '@paper/assets/fonts'
 import store from '@paper/store'
 import theme from '@paper-ui/theme'
 
