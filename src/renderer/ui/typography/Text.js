@@ -46,6 +46,10 @@ const TEXT_MODIFIERS = {
         font-size: ${fontSize('sm')(theme)};
     `,
 
+    'lg': (theme) => css`
+        font-size: ${fontSize('lg')(theme)};
+    `,
+
     'full': () => css`
         width: 100%;
         height: 100%;

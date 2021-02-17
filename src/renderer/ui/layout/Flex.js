@@ -13,6 +13,14 @@ const FLEX_MODIFIERS = {
         align-items: center;
     `,
 
+    'column': () => css`
+        flex-direction: column;
+    `,
+
+    'row': () => css`
+        flex-direction: row;
+    `,
+
 }
 
 export default styled.div`

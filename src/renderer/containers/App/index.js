@@ -2,9 +2,14 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { View } from '@paper-ui/view'
-import { Margin } from '@paper-ui/layout'
+import { Flex, Margin } from '@paper-ui/layout'
+import { Text } from '@paper-ui/typography'
+import { Image } from '@paper-ui/misc'
+
+import introSplashScreen from '@paper/assets/images/intro-splash-screen.svg'
 
 import { Header } from '@paper/components/layout'
+
 import {
     ClipCard,
     AddClipModal,
@@ -20,15 +25,9 @@ import {
     closeDeleteClipPopup,
 } from '@paper/store/clips/actions'
 
-export default () => {
+const App = () => {
 
     const dispatch = useDispatch()
-    const {
-        data,
-        addClipModal,
-        editClipModal,
-        deleteClipPopup,
-    } = useSelector(state => state.clips)
 
     useEffect(() => {
         dispatch(fetchClips())
@@ -36,13 +35,15 @@ export default () => {
 
     const handleOnFileDrop = (event) => {
         const files = event.dataTransfer.files
-        dispatch(openAddClipModal({
-            files: Array.from(files).map(file => ({
-                name: file.name,
-                path: file.path,
-                extension: file.name.split('.').pop(),
-            })),
-        }))
+        if (files.length > 0) {
+            dispatch(openAddClipModal({
+                files: Array.from(files).map(file => ({
+                    name: file.name,
+                    path: file.path,
+                    extension: file.name.split('.').pop(),
+                })),
+            }))
+        }
     }
 
     return (
@@ -55,13 +56,45 @@ export default () => {
                     onDragOver={e => e.preventDefault()}
                     onDrop={handleOnFileDrop}
                 >
-                    {(data || []).map((clip, i) => (
-                        <Margin key={i} all="3">
-                            <ClipCard {...clip} />
-                        </Margin>
-                    ))}
+                    <AppContent />
                 </View.Content>
             </View>
+            <AppModals />
+        </>
+    )
+}
+
+const AppContent = () => {
+    const { data } = useSelector(state => state.clips)
+
+    if (data.length === 0) {
+        return (
+            <Flex modifiers={[ 'full', 'center', 'column' ]}>
+                <Image src={introSplashScreen} width='350px' />
+                <Text modifiers={[ 'font-secondary', 'lg', 'semi-bold' ]}>Drag and Drop your first file 🤟🏻</Text>
+                <Text modifiers={[ 'font-secondary', 'md', 'neutral' ]}>and start organizing!</Text>
+            </Flex>
+        )
+    }
+
+    return (data || []).map((clip, i) => (
+        <Margin key={i} all="3">
+            <ClipCard {...clip} />
+        </Margin>
+    ))
+}
+
+const AppModals = () => {
+
+    const dispatch = useDispatch()
+    const {
+        addClipModal,
+        editClipModal,
+        deleteClipPopup,
+    } = useSelector(state => state.clips)
+
+    return (
+        <>
             {addClipModal.isOpen && (
                 <AddClipModal
                     onClose={() => dispatch(closeAddClipModal())}
@@ -85,3 +118,5 @@ export default () => {
     )
 }
 
+
+export default App

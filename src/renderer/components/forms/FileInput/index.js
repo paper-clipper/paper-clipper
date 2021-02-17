@@ -58,12 +58,12 @@ export default ({
                     onChange={handleOnChange}
                 />
                 <Text
-                    modifiers={[ 'secondary', 'semi-bold', 'sm', 'neutral' ]}
+                    modifiers={[ 'font-secondary', 'semi-bold', 'sm', 'neutral' ]}
                 >
                     Drop files here to add or&nbsp;
                     <Text
                         as='a'
-                        modifiers={[ 'secondary', 'semi-bold', 'sm', 'underline', 'action' ]}
+                        modifiers={[ 'font-secondary', 'semi-bold', 'sm', 'underline', 'action' ]}
                     >
                         browse file
                     </Text>
