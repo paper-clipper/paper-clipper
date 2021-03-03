@@ -29,6 +29,8 @@
         "downshift": "^6.0.6",
         "formik": "^2.2.3",
         "moment": "^2.29.1",
+        "polished": "^4.1.1",
+        "ramda": "^0.27.1",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-redux": "^7.2.2",
