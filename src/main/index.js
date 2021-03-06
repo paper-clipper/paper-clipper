@@ -7,7 +7,7 @@ const { app, shell, ipcMain, BrowserWindow } = require('electron')
 const path = require('path')
 const { homedir } = require('os')
 const url = require('url')
-const { connectToDatabase, getTagsService, getFilesService, getClipsService } = require('./database')
+const { connectToDatabase, getTagsService, getClipsService } = require('./database')
 const { fileExists, createFile } = require('./file-system')
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -123,25 +123,8 @@ app.on('activate', () => {
 })
 
 ipcMain.handle('create-clip', async (event, clip) => {
-
-    const tagsService = getTagsService()
-    const filesService = getFilesService()
     const clipsService = getClipsService()
-    console.log(clip)
-
-    const tags = await Promise.all(
-        clip.tags.map(tag => tagsService.create(tag))
-    )
-
-    const files = await Promise.all(
-        clip.files.map(file => filesService.create(file))
-    )
-
-    return clipsService.create({
-        ...clip,
-        tags,
-        files,
-    })
+    return clipsService.create(clip)
 
 })
 

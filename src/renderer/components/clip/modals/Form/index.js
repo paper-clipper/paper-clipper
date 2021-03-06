@@ -58,13 +58,12 @@ export default ({
 
     const handleOnTagChange = event => {
         const { name, value } = event.target
-        const { tags } = formik.values
         formik.handleChange({
             target: {
                 name,
                 value: value.map(item => ({
                     name: item,
-                    ...(tags.find(tag => tag.name === item) || {}),
+                    ...(tags.data.find(tag => tag.name === item) || {}),
                 })),
             },
         })
@@ -86,7 +85,7 @@ export default ({
         formik.handleChange({
             target: {
                 name,
-                value: [ ...value, ...files ],
+                value: [...value, ...files],
             },
         })
     }
