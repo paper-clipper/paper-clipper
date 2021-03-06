@@ -8,9 +8,6 @@ const path = require('path')
 const url = require('url')
 const { connectToDatabase, getTagsService, getFilesService, getClipsService } = require('./database')
 
-// Add React extension for development
-const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer')
-
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -21,7 +18,6 @@ let dev = false
 // Determine the mode (dev or production)
 if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) || /[\\/]electron[\\/]/.test(process.execPath))
 	dev = true
-
 
 // Temporary fix for broken high-dpi scale factor on Windows (125% scaling)
 // info: https://github.com/electron/electron/issues/9691
@@ -52,7 +48,7 @@ function createWindow () {
 	if (dev && process.argv.indexOf('--noDevServer') === -1)
 		indexPath = url.format({
 			protocol: 'http:',
-			host: 'localhost:8080',
+			host: `${process.env.ELECTRON_WEBPACK_WDS_HOST}:${process.env.ELECTRON_WEBPACK_WDS_PORT}`,
 			pathname: 'index.html',
 			slashes: true,
 		})
@@ -78,8 +74,6 @@ function createWindow () {
 
 		// Open the DevTools automatically if developing
 		if (dev) {
-			installExtension(REACT_DEVELOPER_TOOLS)
-				.catch(err => console.log('Error loading React DevTools: ', err))
 			mainWindow.webContents.openDevTools()
 		}
 	})
