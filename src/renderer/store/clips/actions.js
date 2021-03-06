@@ -48,10 +48,10 @@ export const fetchClipsLikeFailure = payload => ({
 
 export const fetchClipsLike = (query = {}) =>
     dispatch => {
-        dispatch(fetchClipsRequest())
+        dispatch(fetchClipsLikeRequest())
         return ipcRenderer.invoke('fetch-clips-like', query)
-            .then(payload => dispatch(fetchClipsSuccess(payload)))
-            .catch(error => dispatch(fetchClipsFailure(error)))
+            .then(payload => dispatch(fetchClipsLikeSuccess(payload)))
+            .catch(error => dispatch(fetchClipsLikeFailure(error)))
     }
 
 export const CREATE_CLIP_REQUEST = 'CREATE_CLIP_REQUEST'

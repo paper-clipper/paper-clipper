@@ -106,7 +106,7 @@ export default ({
                 <Margin v="1">
                     <TextInput
                         name="name"
-                        placeholder="File name"
+                        placeholder="Clip name"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.name}
@@ -116,7 +116,7 @@ export default ({
                 <Margin v="1">
                     <MultiSelectInput
                         name="tags"
-                        placeholder="Tags"
+                        placeholder="Clip tags"
                         onChange={handleOnTagChange}
                         onBlur={formik.handleBlur}
                         filterItems={handleFilterTags}

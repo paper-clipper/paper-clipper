@@ -41,6 +41,7 @@ const initialState = {
     loading: false,
     error: null,
     data: [],
+    search: false,
     addClipModal: addClipModalInitialState,
     editClipModal: editClipModalInitialState,
     deleteClipPopup: deleteClipPopupInitialState,
@@ -50,7 +51,7 @@ export default (state = initialState, { type, payload }) => {
     switch (type) {
 
         case FETCH_CLIPS_REQUEST:
-            return { ...state, loading: true, error: null }
+            return { ...state, loading: true, search: false, error: null }
 
         case FETCH_CLIPS_SUCCESS:
             return { ...state, data: payload, loading: false, error: null }
@@ -59,7 +60,7 @@ export default (state = initialState, { type, payload }) => {
             return { ...state, error: payload, loading: false }
 
         case FETCH_CLIPS_LIKE_REQUEST:
-            return { ...state, loading: true, error: null }
+            return { ...state, loading: true, search: true, error: null }
 
         case FETCH_CLIPS_LIKE_SUCCESS:
             return { ...state, data: payload, loading: false, error: null }

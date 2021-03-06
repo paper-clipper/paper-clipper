@@ -7,6 +7,7 @@ import { Text } from '@paper-ui/typography'
 import { Image } from '@paper-ui/misc'
 
 import introSplashScreen from '@paper/assets/images/intro-splash-screen.svg'
+import emptySearchResults from '@paper/assets/images/empty-search-results.svg'
 
 import { Header } from '@paper/components/layout'
 
@@ -65,14 +66,24 @@ const App = () => {
 }
 
 const AppContent = () => {
-    const { data } = useSelector(state => state.clips)
+    const { search, data } = useSelector(state => state.clips)
 
     if (data.length === 0) {
         return (
             <Flex modifiers={[ 'full', 'center', 'column' ]}>
-                <Image src={introSplashScreen} width='350px' />
-                <Text modifiers={[ 'font-secondary', 'lg', 'semi-bold' ]}>Drag and Drop your first file 🤟🏻</Text>
-                <Text modifiers={[ 'font-secondary', 'md', 'neutral' ]}>and start organizing!</Text>
+                {!search ? (
+                    <>
+                        <Image src={introSplashScreen} width='350px' />
+                        <Text modifiers={[ 'font-secondary', 'lg', 'semi-bold' ]}>Drag and Drop your first file 🤟🏻</Text>
+                        <Text modifiers={[ 'font-secondary', 'md', 'neutral' ]}>and start organizing!</Text>
+                    </>
+                ) : (
+                    <>
+                        <Image src={emptySearchResults} width='350px' />
+                        <Text modifiers={[ 'font-secondary', 'lg', 'semi-bold' ]}>No files found</Text>
+                        <Text modifiers={[ 'font-secondary', 'md', 'neutral' ]}>Maybe try different search query</Text>
+                    </>
+                )}
             </Flex>
         )
     }
