@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Field } from '@paper-ui/forms'
 import { Text } from '@paper-ui/typography'
