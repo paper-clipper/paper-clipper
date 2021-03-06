@@ -7,7 +7,10 @@ import reducer from './reducers'
 
 const middleware = [
     thunk,
-    process.env.NODE_ENV !== 'production' && logger,
 ]
+
+if(process.env.NODE_ENV !== 'production') {
+    middleware.push(logger)
+}
 
 export default createStore(reducer, applyMiddleware(...middleware))
