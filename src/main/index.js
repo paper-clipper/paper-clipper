@@ -5,8 +5,10 @@
 // Import parts of electron to use
 const { app, shell, ipcMain, BrowserWindow } = require('electron')
 const path = require('path')
+const { homedir } = require('os')
 const url = require('url')
 const { connectToDatabase, getTagsService, getFilesService, getClipsService } = require('./database')
+const { fileExists, createFile } = require('./file-system')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -14,6 +16,10 @@ let mainWindow
 
 // Keep a reference for dev mode
 let dev = false
+
+const HOME_DIR = '.paper-clipper'
+const DATABASE_FILE = 'data.sqlite'
+const DATABASE_PATH = path.join(homedir(), HOME_DIR, DATABASE_FILE)
 
 // Determine the mode (dev or production)
 if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) || /[\\/]electron[\\/]/.test(process.execPath))
@@ -37,6 +43,7 @@ function createWindow () {
         titleBarStyle: 'hiddenInset',
 		webPreferences: {
             nodeIntegration: true,
+            webSecurity: false,
 		},
 	})
 
@@ -55,7 +62,7 @@ function createWindow () {
 	else
 		indexPath = url.format({
 			protocol: 'file:',
-			pathname: path.join(__dirname, 'dist', 'index.html'),
+			pathname: path.join(__dirname, 'index.html'),
 			slashes: true,
 		})
 
@@ -92,7 +99,9 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
-    await connectToDatabase()
+    const databasePath = await fileExists(DATABASE_PATH)
+        .then(exists => exists ? DATABASE_PATH : createFile(HOME_DIR, DATABASE_FILE))
+    await connectToDatabase(databasePath)
     createWindow()
 })
 
