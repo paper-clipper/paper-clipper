@@ -53,7 +53,7 @@ export default ({
         dispatch(openFiles(files))
     }
 
-    const truncate = (text, length = 22) =>
+    const truncate = (text, length = 20) =>
         text.length > length ? `${text.substring(0, length)}...` : text
 
     return (
