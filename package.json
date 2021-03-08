@@ -69,6 +69,33 @@
     "build": {
         "productName": "Paper Clipper",
         "appId": "io.paperclipper.PaperClipper",
+        "mac": {
+            "target": [
+                "dmg"
+            ],
+            "type": "distribution",
+            "hardenedRuntime": true,
+            "gatekeeperAssess": false
+        },
+        "dmg": {
+            "contents": [
+                {
+                    "x": 130,
+                    "y": 220
+                },
+                {
+                    "x": 410,
+                    "y": 220,
+                    "type": "link",
+                    "path": "/Applications"
+                }
+            ]
+        },
+        "win": {
+            "target": [
+                "nsis"
+            ]
+        },
         "directories": {
             "buildResources": "assets",
             "output": "release"
