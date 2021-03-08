@@ -1,6 +1,6 @@
 {
     "name": "paper-clipper",
-    "version": "0.0.1-alpha",
+    "version": "0.1.0-alpha",
     "description": "",
     "main": "src/main/index.js",
     "author": "paper-clipper.io",
