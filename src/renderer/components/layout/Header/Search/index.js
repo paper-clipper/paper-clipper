@@ -19,7 +19,7 @@ export default forwardRef(({
     const handleChange = event => {
         const { value } = event.target
         setSearchInput(value)
-        dispatch(fetchClipsLike({ name: value }))
+        dispatch(fetchClipsLike({ name: value, extension: value, tag: value }))
     }
 
     return (
