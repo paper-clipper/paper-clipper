@@ -157,3 +157,7 @@ ipcMain.handle('fetch-tags-like', (event, query) => {
 ipcMain.handle('open-files', (event, files) => {
     return Promise.all(files.map(file => shell.openPath(file.path)))
 })
+
+ipcMain.handle('open-in-folder', (event, files) => {
+    return Promise.all(files.map(file => shell.showItemInFolder(file.path)))
+})

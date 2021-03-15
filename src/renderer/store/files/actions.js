@@ -53,3 +53,29 @@ export const openFiles = files =>
             .then(payload => dispatch(openFilesSuccess(payload)))
             .catch(error => dispatch(openFilesFailure(error)))
     }
+
+export const OPEN_IN_FOLDER_REQUEST = 'OPEN_IN_FOLDER_REQUEST'
+export const OPEN_IN_FOLDER_SUCCESS = 'OPEN_IN_FOLDER_SUCCESS'
+export const OPEN_IN_FOLDER_FAILURE = 'OPEN_IN_FOLDER_FAILURE'
+
+export const openInFolderRequest = (payload) => ({
+    type: OPEN_IN_FOLDER_REQUEST,
+    payload,
+})
+
+export const openInFolderSuccess = (payload) => ({
+    type: OPEN_IN_FOLDER_SUCCESS,
+    payload,
+})
+
+export const openInFolderFailure = (payload) => ({
+    type: OPEN_IN_FOLDER_FAILURE,
+    payload,
+})
+
+export const openInFolder = files => dispatch => {
+    dispatch(openInFolderRequest())
+    return ipcRenderer.invoke('open-in-folder', files)
+        .then(payload => dispatch(openInFolderSuccess(payload)))
+        .catch(error => dispatch(openInFolderFailure(error)))
+}
