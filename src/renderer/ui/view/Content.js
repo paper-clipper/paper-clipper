@@ -13,6 +13,7 @@ export default styled.div`
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
+    align-content: flex-start;
     background: ${color('brand.secondary')};
     z-index: ${zIndex('base')};
 `
