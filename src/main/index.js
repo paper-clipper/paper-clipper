@@ -38,7 +38,8 @@ function createWindow () {
 		width: 1120, // width of the window
 		height: 608, // height of the window
         show: false, // don't show until window is ready
-        transparent: true,
+        transparent: process.platform !== 'win32', // On Windows transparent: true causes window to not be resizable
+        resizable: true,
         frame: process.platform !== 'darwin',
         titleBarStyle: 'hiddenInset',
 		webPreferences: {
@@ -155,4 +156,8 @@ ipcMain.handle('fetch-tags-like', (event, query) => {
 
 ipcMain.handle('open-files', (event, files) => {
     return Promise.all(files.map(file => shell.openPath(file.path)))
+})
+
+ipcMain.handle('open-in-folder', (event, files) => {
+    return Promise.all(files.map(file => shell.showItemInFolder(file.path)))
 })

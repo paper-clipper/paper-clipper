@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsisV, faPen, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faEllipsisV, faPen, faTrash, faFolder } from '@fortawesome/free-solid-svg-icons'
 import * as moment from 'moment'
 
 import { ClipCard } from '@paper-ui/clip'
@@ -16,7 +16,7 @@ import { Menu } from '@paper/components/overlay'
 import { useOnClickOutside } from '@paper/hooks'
 
 import { openEditClipModal, openDeleteClipPopup } from '@paper/store/clips/actions'
-import { openFiles } from '@paper/store/files/actions'
+import { openFiles, openInFolder } from '@paper/store/files/actions'
 
 export default ({
     id,
@@ -32,6 +32,11 @@ export default ({
     useOnClickOutside(menuRef, () => setIsMenuOpen(false))
 
     const menuItems = [
+        {
+            name: 'Open folder',
+            icon: faFolder,
+            handler: () => dispatch(openInFolder(files)),
+        },
         {
             name: 'Edit',
             icon: faPen,
